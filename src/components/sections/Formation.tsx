@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, Wrench, ShieldAlert, Factory } from 'lucide-react';
 

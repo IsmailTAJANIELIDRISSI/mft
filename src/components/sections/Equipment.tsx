@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Fuel, Droplets, GaugeCircle, ShieldAlert } from 'lucide-react';
 

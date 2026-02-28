@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Wrench, Leaf, ShieldCheck } from 'lucide-react';
 import aboutBackground from '../../assets/image/about-background.png';
