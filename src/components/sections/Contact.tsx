@@ -1,7 +1,22 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, Globe, Send } from "lucide-react";
+import React, { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Globe,
+  Send,
+  CheckCircle2,
+  AlertCircle,
+} from "lucide-react";
+import emailjs from "@emailjs/browser";
 import EnergyLines from "../ui/EnergyLines";
+
+// ─── Replace these three values with your EmailJS credentials ───
+const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+// ────────────────────────────────────────────────────────────────
 
 const contactInfo = [
   {
@@ -22,19 +37,25 @@ const contactInfo = [
   {
     icon: <Globe size={22} />,
     title: "Site Web",
-    lines: ["www.mft.ma"],
+    lines: ["www.mft-teer.vercel.app"],
   },
 ];
 
+const emptyForm = {
+  name: "",
+  company: "",
+  email: "",
+  phone: "",
+  service: "",
+  message: "",
+};
+
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    company: "",
-    email: "",
-    phone: "",
-    service: "",
-    message: "",
-  });
+  const formRef = useRef<HTMLFormElement>(null);
+  const [formData, setFormData] = useState(emptyForm);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -46,16 +67,27 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Merci ! Votre demande a été envoyée avec succès.");
-    setFormData({
-      name: "",
-      company: "",
-      email: "",
-      phone: "",
-      service: "",
-      message: "",
-    });
+    if (!formRef.current) return;
+    setIsSubmitting(true);
+    setError("");
+
+    emailjs
+      .sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        EMAILJS_PUBLIC_KEY,
+      )
+      .then(() => {
+        setIsSubmitted(true);
+        setFormData(emptyForm);
+      })
+      .catch(() => {
+        setError(
+          "Une erreur s'est produite. Veuillez réessayer ou nous contacter par téléphone.",
+        );
+      })
+      .finally(() => setIsSubmitting(false));
   };
 
   return (
@@ -63,8 +95,8 @@ const Contact = () => {
       id="contact"
       className="py-24 lg:py-32 bg-mft-dark overflow-hidden relative"
     >
-      <EnergyLines lineCount={10} baseHue={20} hueRange={50} opacity={0.08} />
-      <div className="absolute inset-0 bg-gradient-to-b from-mft-dark to-[#111111]" />
+      <EnergyLines lineCount={20} baseHue={25} hueRange={80} opacity={0.12} />
+      <div className="absolute inset-0 bg-gradient-to-b from-mft-dark/60 to-[#111111]/80 pointer-events-none" />
       <div className="absolute right-0 bottom-0 w-[600px] h-[600px] bg-mft-orange/8 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
@@ -168,148 +200,230 @@ const Contact = () => {
                 Envoyez-nous un message
               </h3>
 
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-xs font-semibold text-mft-grey-dark mb-2 uppercase tracking-wider"
-                    >
-                      Nom complet *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-mft-orange focus:ring-2 focus:ring-mft-orange/20 transition-all outline-none text-sm"
-                      placeholder="Jean Dupont"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="company"
-                      className="block text-xs font-semibold text-mft-grey-dark mb-2 uppercase tracking-wider"
-                    >
-                      Société
-                    </label>
-                    <input
-                      type="text"
-                      id="company"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-mft-orange focus:ring-2 focus:ring-mft-orange/20 transition-all outline-none text-sm"
-                      placeholder="Nom de l'entreprise"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-xs font-semibold text-mft-grey-dark mb-2 uppercase tracking-wider"
-                    >
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-mft-orange focus:ring-2 focus:ring-mft-orange/20 transition-all outline-none text-sm"
-                      placeholder="jean@email.com"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="phone"
-                      className="block text-xs font-semibold text-mft-grey-dark mb-2 uppercase tracking-wider"
-                    >
-                      Téléphone *
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      required
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-mft-orange focus:ring-2 focus:ring-mft-orange/20 transition-all outline-none text-sm"
-                      placeholder="+212 6 XX XX XX XX"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="service"
-                    className="block text-xs font-semibold text-mft-grey-dark mb-2 uppercase tracking-wider"
+              <AnimatePresence mode="wait">
+                {isSubmitted ? (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.96, y: 16 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.45, ease: "easeOut" }}
+                    className="py-10 flex flex-col items-center text-center"
                   >
-                    Type de service
-                  </label>
-                  <select
-                    id="service"
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-mft-orange focus:ring-2 focus:ring-mft-orange/20 transition-all outline-none cursor-pointer appearance-none text-sm"
-                    style={{
-                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`,
-                      backgroundRepeat: "no-repeat",
-                      backgroundPosition: "right 1rem center",
-                      backgroundSize: "1em",
-                    }}
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 220,
+                        damping: 16,
+                        delay: 0.15,
+                      }}
+                      className="w-20 h-20 rounded-full bg-mft-orange/10 border-2 border-mft-orange/30 flex items-center justify-center mb-6"
+                    >
+                      <CheckCircle2 size={40} className="text-mft-orange" />
+                    </motion.div>
+                    <h4 className="font-heading font-bold text-2xl text-mft-dark mb-2">
+                      Demande envoyée !
+                    </h4>
+                    <p className="text-gray-500 text-sm leading-relaxed mb-8 max-w-xs">
+                      Merci pour votre message. Notre équipe technique vous
+                      répondra dans les{" "}
+                      <span className="font-semibold text-mft-orange">24h</span>
+                      .
+                    </p>
+                    <motion.button
+                      type="button"
+                      onClick={() => setIsSubmitted(false)}
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      className="px-6 py-3 rounded-xl border-2 border-mft-orange text-mft-orange font-bold text-sm hover:bg-mft-orange hover:text-white transition-all duration-300"
+                    >
+                      Nouvelle demande
+                    </motion.button>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="form"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
                   >
-                    <option value="">Sélectionnez un service</option>
-                    <option value="installation">
-                      Installation & Mise en service
-                    </option>
-                    <option value="maintenance">Maintenance & Dépannage</option>
-                    <option value="etudes">Études Techniques</option>
-                    <option value="formation">Formation</option>
-                    <option value="equipement">Achat d'Équipement</option>
-                    <option value="autre">Autre demande</option>
-                  </select>
-                </div>
+                    <form
+                      ref={formRef}
+                      onSubmit={handleSubmit}
+                      className="space-y-5"
+                    >
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                          <label
+                            htmlFor="name"
+                            className="block text-xs font-semibold text-mft-grey-dark mb-2 uppercase tracking-wider"
+                          >
+                            Nom complet *
+                          </label>
+                          <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            required
+                            value={formData.name}
+                            onChange={handleChange}
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-mft-orange focus:ring-2 focus:ring-mft-orange/20 transition-all outline-none text-sm"
+                            placeholder="Jean Dupont"
+                          />
+                        </div>
+                        <div>
+                          <label
+                            htmlFor="company"
+                            className="block text-xs font-semibold text-mft-grey-dark mb-2 uppercase tracking-wider"
+                          >
+                            Société
+                          </label>
+                          <input
+                            type="text"
+                            id="company"
+                            name="company"
+                            value={formData.company}
+                            onChange={handleChange}
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-mft-orange focus:ring-2 focus:ring-mft-orange/20 transition-all outline-none text-sm"
+                            placeholder="Nom de l'entreprise"
+                          />
+                        </div>
+                      </div>
 
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-xs font-semibold text-mft-grey-dark mb-2 uppercase tracking-wider"
-                  >
-                    Message *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    required
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-mft-orange focus:ring-2 focus:ring-mft-orange/20 transition-all outline-none resize-y text-sm"
-                    placeholder="Comment pouvons-nous vous aider ?"
-                  />
-                </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                          <label
+                            htmlFor="email"
+                            className="block text-xs font-semibold text-mft-grey-dark mb-2 uppercase tracking-wider"
+                          >
+                            Email *
+                          </label>
+                          <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            required
+                            value={formData.email}
+                            onChange={handleChange}
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-mft-orange focus:ring-2 focus:ring-mft-orange/20 transition-all outline-none text-sm"
+                            placeholder="jean@email.com"
+                          />
+                        </div>
+                        <div>
+                          <label
+                            htmlFor="phone"
+                            className="block text-xs font-semibold text-mft-grey-dark mb-2 uppercase tracking-wider"
+                          >
+                            Téléphone *
+                          </label>
+                          <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            required
+                            value={formData.phone}
+                            onChange={handleChange}
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-mft-orange focus:ring-2 focus:ring-mft-orange/20 transition-all outline-none text-sm"
+                            placeholder="+212 6 XX XX XX XX"
+                          />
+                        </div>
+                      </div>
 
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="group/btn w-full py-4 rounded-xl bg-mft-orange text-white font-bold text-base transition-all hover:bg-mft-orange-light hover:shadow-[0_20px_40px_-12px_rgba(232,119,34,0.4)] active:translate-y-0 flex items-center justify-center gap-3 relative overflow-hidden"
-                >
-                  <span className="relative z-10 flex items-center gap-3">
-                    Envoyer la demande
-                    <Send size={18} />
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
-                </motion.button>
-              </form>
+                      <div>
+                        <label
+                          htmlFor="service"
+                          className="block text-xs font-semibold text-mft-grey-dark mb-2 uppercase tracking-wider"
+                        >
+                          Type de service
+                        </label>
+                        <select
+                          id="service"
+                          name="service"
+                          value={formData.service}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-mft-orange focus:ring-2 focus:ring-mft-orange/20 transition-all outline-none cursor-pointer appearance-none text-sm"
+                          style={{
+                            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`,
+                            backgroundRepeat: "no-repeat",
+                            backgroundPosition: "right 1rem center",
+                            backgroundSize: "1em",
+                          }}
+                        >
+                          <option value="">Sélectionnez un service</option>
+                          <option value="installation">
+                            Installation & Mise en service
+                          </option>
+                          <option value="maintenance">
+                            Maintenance & Dépannage
+                          </option>
+                          <option value="etudes">Études Techniques</option>
+                          <option value="formation">Formation</option>
+                          <option value="equipement">Achat d'Équipement</option>
+                          <option value="autre">Autre demande</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label
+                          htmlFor="message"
+                          className="block text-xs font-semibold text-mft-grey-dark mb-2 uppercase tracking-wider"
+                        >
+                          Message *
+                        </label>
+                        <textarea
+                          id="message"
+                          name="message"
+                          rows={4}
+                          required
+                          value={formData.message}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-mft-orange focus:ring-2 focus:ring-mft-orange/20 transition-all outline-none resize-y text-sm"
+                          placeholder="Comment pouvons-nous vous aider ?"
+                        />
+                      </div>
+
+                      {error && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -8 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm"
+                        >
+                          <AlertCircle size={18} className="shrink-0 mt-0.5" />
+                          {error}
+                        </motion.div>
+                      )}
+
+                      <motion.button
+                        type="submit"
+                        disabled={isSubmitting}
+                        whileHover={{
+                          scale: isSubmitting ? 1 : 1.02,
+                          y: isSubmitting ? 0 : -2,
+                        }}
+                        whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                        className="group/btn w-full py-4 rounded-xl bg-mft-orange text-white font-bold text-base transition-all hover:bg-mft-orange-light hover:shadow-[0_20px_40px_-12px_rgba(232,119,34,0.4)] flex items-center justify-center gap-3 relative overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed"
+                      >
+                        <span className="relative z-10 flex items-center gap-3">
+                          {isSubmitting ? (
+                            <>
+                              <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                              Envoi en cours…
+                            </>
+                          ) : (
+                            <>
+                              Envoyer la demande
+                              <Send size={18} />
+                            </>
+                          )}
+                        </span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
+                      </motion.button>
+                    </form>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         </div>

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Fuel, Droplets, GaugeCircle, ShieldAlert } from "lucide-react";
 import GlowCard from "../ui/GlowCard";
+import EnergyLines from "../ui/EnergyLines";
 
 const eqCategories = [
   {
@@ -39,6 +40,7 @@ const Equipment = () => {
       id="equipement"
       className="py-24 lg:py-32 bg-[#121418] relative overflow-hidden"
     >
+      <EnergyLines lineCount={20} baseHue={25} hueRange={80} opacity={0.12} />
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{

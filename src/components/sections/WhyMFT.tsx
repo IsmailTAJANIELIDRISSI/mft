@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Trophy, ShieldCheck, Truck, ArrowRight } from "lucide-react";
 import GlowCard from "../ui/GlowCard";
+import EnergyLines from "../ui/EnergyLines";
 
 const reasons = [
   {
@@ -32,6 +33,7 @@ const reasons = [
 const WhyMFT = () => {
   return (
     <section className="py-24 lg:py-32 bg-[#0A0A0A] relative overflow-hidden">
+      <EnergyLines lineCount={20} baseHue={25} hueRange={80} opacity={0.12} />
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
@@ -108,9 +110,6 @@ const WhyMFT = () => {
                         type: "spring",
                       }}
                       className="font-heading font-extrabold text-3xl text-white/90 group-hover:text-mft-orange transition-colors duration-300"
-                      style={{
-                        animation: `glow-pulse 3s ease-in-out ${i * 0.8}s infinite`,
-                      }}
                     >
                       {reason.stat}
                     </motion.div>

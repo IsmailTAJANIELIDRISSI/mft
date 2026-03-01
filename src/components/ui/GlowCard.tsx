@@ -113,7 +113,7 @@ const GlowCard = ({
       )}
 
       {/* Content */}
-      <div className="relative z-10">{children}</div>
+      <div className="relative z-10 rounded-3xl">{children}</div>
     </motion.div>
   );
 };

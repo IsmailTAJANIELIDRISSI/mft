@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Wrench, Leaf, ShieldCheck } from "lucide-react";
 import aboutBackground from "../../assets/image/about-background.png";
 import LazyImage from "../ui/LazyImage";
+import EnergyLines from "../ui/EnergyLines";
 import { useRef } from "react";
 
 const features = [
@@ -39,7 +40,14 @@ const About = () => {
       id="about"
       className="py-24 lg:py-32 bg-[#0d0d0d] overflow-hidden relative"
     >
-      <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "radial-gradient(white 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+      <EnergyLines lineCount={20} baseHue={25} hueRange={80} opacity={0.15} />
+      <div
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: "radial-gradient(white 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
       <div className="absolute left-0 top-0 w-[500px] h-[500px] bg-mft-orange/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10">

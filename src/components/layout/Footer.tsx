@@ -7,10 +7,12 @@ import {
   Phone,
   Printer,
 } from "lucide-react";
+import EnergyLines from "../ui/EnergyLines";
 
 const Footer = () => {
   return (
     <footer className="bg-mft-dark text-white/80 pt-20 pb-10 relative overflow-hidden">
+      <EnergyLines lineCount={15} baseHue={25} hueRange={80} opacity={0.1} />
       {/* Top Gradient Accent */}
       <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-mft-orange via-mft-green to-mft-dark" />
 
