@@ -11,11 +11,13 @@ const totalPages = Math.ceil(activities.length / CARDS_PER_PAGE);
 const Activities = () => {
   const [page, setPage] = useState(0);
   const [direction, setDirection] = useState(0);
-  const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
+  const [selectedActivity, setSelectedActivity] = useState<Activity | null>(
+    null,
+  );
 
   const currentCards = activities.slice(
     page * CARDS_PER_PAGE,
-    page * CARDS_PER_PAGE + CARDS_PER_PAGE
+    page * CARDS_PER_PAGE + CARDS_PER_PAGE,
   );
 
   const paginate = useCallback((dir: number) => {
@@ -52,7 +54,10 @@ const Activities = () => {
 
   return (
     <>
-      <section id="activites" className="py-24 lg:py-32 bg-mft-dark relative overflow-hidden">
+      <section
+        id="activites"
+        className="py-24 lg:py-32 bg-mft-dark relative overflow-hidden"
+      >
         {/* Ambient glows */}
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-mft-orange/6 rounded-full blur-[150px] pointer-events-none" />
         <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-mft-green/4 rounded-full blur-[120px] pointer-events-none" />
@@ -67,9 +72,15 @@ const Activities = () => {
               transition={{ duration: 0.6 }}
               className="max-w-2xl"
             >
-              <span className="text-mft-orange uppercase tracking-widest text-xs font-bold mb-4 inline-block">
+              <motion.span
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-mft-orange uppercase tracking-widest text-xs font-bold mb-4 inline-block"
+              >
                 NOS ACTIVITÉS
-              </span>
+              </motion.span>
               <h2 className="font-heading font-bold text-4xl lg:text-5xl text-white mb-4 leading-tight">
                 Nos domaines d'expertise
               </h2>
@@ -90,7 +101,10 @@ const Activities = () => {
                 {Array.from({ length: totalPages }).map((_, i) => (
                   <button
                     key={i}
-                    onClick={() => { setDirection(i > page ? 1 : -1); setPage(i); }}
+                    onClick={() => {
+                      setDirection(i > page ? 1 : -1);
+                      setPage(i);
+                    }}
                     className={`cursor-pointer h-2 rounded-full transition-all duration-300 ${
                       i === page
                         ? "w-8 bg-mft-orange"
@@ -100,18 +114,22 @@ const Activities = () => {
                 ))}
               </div>
 
-              <button
+              <motion.button
                 onClick={() => paginate(-1)}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 className="cursor-pointer w-12 h-12 rounded-xl border border-white/20 flex items-center justify-center text-white/70 hover:border-mft-orange hover:text-mft-orange transition-all duration-300"
               >
                 <ChevronLeft size={20} />
-              </button>
-              <button
+              </motion.button>
+              <motion.button
                 onClick={() => paginate(1)}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 className="cursor-pointer w-12 h-12 rounded-xl bg-mft-orange text-white flex items-center justify-center hover:bg-mft-orange-light transition-all duration-300 hover:shadow-lg hover:shadow-mft-orange/30"
               >
                 <ChevronRight size={20} />
-              </button>
+              </motion.button>
             </motion.div>
           </div>
 
@@ -136,19 +154,40 @@ const Activities = () => {
                     key={activity.slug}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.1, duration: 0.5 }}
-                    className="group relative rounded-3xl overflow-hidden border border-white/[0.08] bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.06] hover:border-white/[0.15] transition-all duration-500 hover:-translate-y-1 flex flex-col"
-                    style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)" }}
+                    transition={{ delay: i * 0.12, duration: 0.5 }}
+                    whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                    className="group relative rounded-3xl overflow-hidden border border-white/[0.08] bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.06] hover:border-white/[0.15] transition-all duration-500 flex flex-col"
+                    style={{
+                      boxShadow:
+                        "0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)",
+                    }}
                   >
+                    {/* Electric glow border on hover */}
+                    <div
+                      className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                      style={{
+                        padding: "1px",
+                        background:
+                          i % 2 === 0
+                            ? "linear-gradient(135deg, rgba(232,119,34,0.4), transparent 40%, transparent 60%, rgba(232,119,34,0.2))"
+                            : "linear-gradient(135deg, rgba(124,181,24,0.4), transparent 40%, transparent 60%, rgba(124,181,24,0.2))",
+                        mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                        WebkitMaskComposite: "xor",
+                        maskComposite: "exclude",
+                      }}
+                    />
+
                     {/* Image */}
                     <div className="relative overflow-hidden">
                       <LazyImage
                         src={activity.heroImage}
                         alt={activity.title}
                         wrapperClassName="h-52"
-                        className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                      {/* Shimmer overlay on hover */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
 
                       <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-sm border border-white/10 text-white text-[11px] font-semibold">
                         {activity.images.length} photos
@@ -156,7 +195,9 @@ const Activities = () => {
 
                       {/* Number overlay */}
                       <div className="absolute bottom-3 left-4">
-                        <span className={`text-[11px] font-bold backdrop-blur-sm px-2.5 py-1 rounded-md border ${i % 2 === 0 ? "text-mft-orange bg-mft-orange/20 border-mft-orange/30" : "text-mft-green bg-mft-green/20 border-mft-green/30"}`}>
+                        <span
+                          className={`text-[11px] font-bold backdrop-blur-sm px-2.5 py-1 rounded-md border ${i % 2 === 0 ? "text-mft-orange bg-mft-orange/20 border-mft-orange/30" : "text-mft-green bg-mft-green/20 border-mft-green/30"}`}
+                        >
                           0{activity.id}
                         </span>
                       </div>
@@ -171,14 +212,19 @@ const Activities = () => {
                         {activity.summary}
                       </p>
 
-                      <button
+                      <motion.button
                         onClick={() => setSelectedActivity(activity)}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
                         className={`cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.06] border border-white/10 text-white/80 text-sm font-medium hover:text-white transition-all duration-300 self-start ${i % 2 === 0 ? "hover:bg-mft-orange hover:border-mft-orange" : "hover:bg-mft-green hover:border-mft-green"}`}
                       >
                         <Eye size={15} />
                         Voir les détails
-                        <ChevronRight size={13} className="transition-transform group-hover:translate-x-0.5" />
-                      </button>
+                        <ChevronRight
+                          size={13}
+                          className="transition-transform group-hover:translate-x-0.5"
+                        />
+                      </motion.button>
                     </div>
                   </motion.article>
                 ))}

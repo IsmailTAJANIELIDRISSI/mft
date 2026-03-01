@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Globe, Send } from "lucide-react";
+import EnergyLines from "../ui/EnergyLines";
 
 const contactInfo = [
   {
@@ -38,7 +39,7 @@ const Contact = () => {
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -62,6 +63,7 @@ const Contact = () => {
       id="contact"
       className="py-24 lg:py-32 bg-mft-dark overflow-hidden relative"
     >
+      <EnergyLines lineCount={10} baseHue={20} hueRange={50} opacity={0.08} />
       <div className="absolute inset-0 bg-gradient-to-b from-mft-dark to-[#111111]" />
       <div className="absolute right-0 bottom-0 w-[600px] h-[600px] bg-mft-orange/8 rounded-full blur-[150px] pointer-events-none" />
 
@@ -74,14 +76,33 @@ const Contact = () => {
             transition={{ duration: 0.8 }}
             className="flex flex-col justify-center"
           >
-            <span className="text-mft-orange uppercase tracking-widest text-xs font-bold mb-4 inline-block">
+            <motion.span
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-mft-orange uppercase tracking-widest text-xs font-bold mb-4 inline-block"
+            >
               CONTACT
-            </span>
+            </motion.span>
             <h2 className="font-heading font-extrabold text-4xl lg:text-5xl text-white mb-6 leading-tight">
               Parlons de votre{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-mft-orange to-mft-orange-light">
+              <motion.span
+                initial={{ backgroundSize: "0% 3px" }}
+                whileInView={{ backgroundSize: "100% 3px" }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, delay: 0.5 }}
+                className="text-transparent bg-clip-text"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to right, #E87722, #F4A543)",
+                  WebkitBackgroundClip: "text",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "0 100%",
+                }}
+              >
                 prochain projet
-              </span>
+              </motion.span>
             </h2>
             <p className="text-white/60 text-lg mb-12 max-w-lg leading-relaxed">
               Nos experts sont à votre disposition pour analyser vos besoins et
@@ -95,12 +116,18 @@ const Contact = () => {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                  transition={{ delay: i * 0.12, duration: 0.5 }}
                   className="flex items-start gap-4 group"
                 >
-                  <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-mft-orange shrink-0 group-hover:bg-mft-orange group-hover:text-white group-hover:border-mft-orange transition-all duration-300">
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-mft-orange shrink-0 group-hover:bg-mft-orange group-hover:text-white group-hover:border-mft-orange transition-all duration-300"
+                    style={{
+                      animation: `glow-pulse 4s ease-in-out ${i * 0.5}s infinite`,
+                    }}
+                  >
                     {item.icon}
-                  </div>
+                  </motion.div>
                   <div>
                     <h4 className="font-heading font-bold text-white text-sm mb-1">
                       {item.title}
@@ -122,8 +149,20 @@ const Contact = () => {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.8, delay: 0.15 }}
           >
-            <div className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden">
+            <div className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-28 h-28 bg-mft-orange/8 rounded-bl-[80px] pointer-events-none" />
+              {/* Subtle animated border glow on the form card */}
+              <div
+                className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                style={{
+                  padding: "1px",
+                  background:
+                    "linear-gradient(135deg, rgba(232,119,34,0.3), transparent 40%, transparent 60%, rgba(244,165,67,0.2))",
+                  mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                  WebkitMaskComposite: "xor",
+                  maskComposite: "exclude",
+                }}
+              />
 
               <h3 className="font-heading font-bold text-xl text-mft-dark mb-8">
                 Envoyez-nous un message
@@ -228,7 +267,9 @@ const Contact = () => {
                     }}
                   >
                     <option value="">Sélectionnez un service</option>
-                    <option value="installation">Installation & Mise en service</option>
+                    <option value="installation">
+                      Installation & Mise en service
+                    </option>
                     <option value="maintenance">Maintenance & Dépannage</option>
                     <option value="etudes">Études Techniques</option>
                     <option value="formation">Formation</option>
@@ -256,16 +297,18 @@ const Contact = () => {
                   />
                 </div>
 
-                <button
+                <motion.button
                   type="submit"
-                  className="group w-full py-4 rounded-xl bg-mft-orange text-white font-bold text-base transition-all hover:bg-mft-orange-light hover:-translate-y-0.5 hover:shadow-[0_20px_40px_-12px_rgba(232,119,34,0.4)] active:translate-y-0 flex items-center justify-center gap-3 relative overflow-hidden"
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group/btn w-full py-4 rounded-xl bg-mft-orange text-white font-bold text-base transition-all hover:bg-mft-orange-light hover:shadow-[0_20px_40px_-12px_rgba(232,119,34,0.4)] active:translate-y-0 flex items-center justify-center gap-3 relative overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center gap-3">
                     Envoyer la demande
                     <Send size={18} />
                   </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                </button>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
+                </motion.button>
               </form>
             </div>
           </motion.div>

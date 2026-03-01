@@ -1,30 +1,32 @@
 import { motion } from "framer-motion";
 import { Briefcase, Wrench, ShieldAlert, Factory } from "lucide-react";
+import GlowCard from "../ui/GlowCard";
+import EnergyLines from "../ui/EnergyLines";
 
 const formationCards = [
   {
     icon: <Briefcase className="w-6 h-6" />,
     title: "Exploitation",
     desc: "Accompagnement dans l'exploitation quotidienne des stations pétrolières.",
-    gradient: "from-mft-orange/20 to-mft-orange/5",
+    color: "orange" as const,
   },
   {
     icon: <Wrench className="w-6 h-6" />,
     title: "Maintenance",
     desc: "Formation aux bonnes pratiques de maintenance préventive et corrective.",
-    gradient: "from-mft-orange/20 to-mft-orange/5",
+    color: "green" as const,
   },
   {
     icon: <ShieldAlert className="w-6 h-6" />,
     title: "Sécurité",
     desc: "Protocoles stricts et prévention des risques sur sites industriels.",
-    gradient: "from-mft-green/20 to-mft-green/5",
+    color: "orange" as const,
   },
   {
     icon: <Factory className="w-6 h-6" />,
     title: "Stockage",
     desc: "Normes et gestion sécurisée des dépôts et cuves de stockage.",
-    gradient: "from-mft-green/20 to-mft-green/5",
+    color: "green" as const,
   },
 ];
 
@@ -34,6 +36,9 @@ const Formation = () => {
       id="formation"
       className="py-24 lg:py-32 bg-mft-dark relative overflow-hidden"
     >
+      {/* Animated energy lines background */}
+      <EnergyLines lineCount={20} baseHue={25} hueRange={80} opacity={0.15} />
+
       <div
         className="absolute inset-0 opacity-[0.06]"
         style={{
@@ -51,27 +56,54 @@ const Formation = () => {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-mft-orange uppercase tracking-widest text-xs font-bold mb-6 inline-block">
+            <motion.span
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-mft-orange uppercase tracking-widest text-xs font-bold mb-6 inline-block"
+            >
               FORMATION & ACCOMPAGNEMENT
-            </span>
+            </motion.span>
             <h2 className="font-heading font-extrabold text-4xl lg:text-5xl text-white mb-6 leading-tight">
               Formez vos équipes aux{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-mft-orange to-mft-orange-light">
+              <motion.span
+                initial={{ backgroundSize: "0% 3px" }}
+                whileInView={{ backgroundSize: "100% 3px" }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, delay: 0.5 }}
+                className="text-transparent bg-clip-text"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to right, #E87722, #F4A543)",
+                  WebkitBackgroundClip: "text",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "0 100%",
+                }}
+              >
                 meilleures pratiques
-              </span>
+              </motion.span>
             </h2>
-            <p className="text-lg text-white/60 mb-10 leading-relaxed">
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-lg text-white/60 mb-10 leading-relaxed"
+            >
               Des programmes de formation sur-mesure pour exploitants,
               techniciens et opérateurs, dispensés par nos spécialistes
               directement sur site ou dans nos salles équipées.
-            </p>
-            <a
+            </motion.p>
+            <motion.a
               href="#contact"
-              className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-mft-orange/10 border border-mft-orange/30 text-mft-orange font-bold transition-all hover:bg-mft-orange hover:text-white hover:border-mft-orange hover:-translate-y-0.5 hover:shadow-[0_20px_40px_-12px_rgba(232,119,34,0.3)] overflow-hidden"
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-mft-orange/10 border border-mft-orange/30 text-mft-orange font-bold transition-all hover:bg-mft-orange hover:text-white hover:border-mft-orange hover:shadow-[0_20px_40px_-12px_rgba(232,119,34,0.3)] overflow-hidden"
             >
               <span className="relative z-10">Demander un programme</span>
               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-            </a>
+            </motion.a>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 relative">
@@ -83,13 +115,22 @@ const Formation = () => {
                 initial={{ opacity: 0, y: 24, scale: 0.95 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group bg-white/[0.03] backdrop-blur-md border border-white/[0.08] rounded-3xl p-6 relative overflow-hidden hover:bg-white/[0.06] hover:border-white/[0.15] transition-all duration-500 hover:-translate-y-1"
+                transition={{ duration: 0.5, delay: index * 0.12 }}
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-
-                <div className="relative z-10">
-                  <div className={`w-12 h-12 rounded-xl bg-white/[0.08] border border-white/10 flex items-center justify-center mb-5 ${index % 2 === 0 ? "text-mft-orange group-hover:bg-mft-orange/20 group-hover:border-mft-orange/30" : "text-mft-green group-hover:bg-mft-green/20 group-hover:border-mft-green/30"} transition-all duration-300`}>
+                <GlowCard
+                  glowColor={card.color}
+                  className="p-6 backdrop-blur-md hover:-translate-y-2 transition-transform duration-500"
+                >
+                  <div
+                    className={`w-12 h-12 rounded-xl bg-white/[0.08] border border-white/10 flex items-center justify-center mb-5 transition-all duration-500 ${
+                      card.color === "orange"
+                        ? "text-mft-orange group-hover:bg-mft-orange/20 group-hover:border-mft-orange/30"
+                        : "text-mft-green group-hover:bg-mft-green/20 group-hover:border-mft-green/30"
+                    }`}
+                    style={{
+                      animation: `float 4s ease-in-out ${index * 0.4}s infinite`,
+                    }}
+                  >
                     {card.icon}
                   </div>
 
@@ -99,7 +140,7 @@ const Formation = () => {
                   <p className="text-white/50 text-sm leading-relaxed">
                     {card.desc}
                   </p>
-                </div>
+                </GlowCard>
               </motion.div>
             ))}
           </div>
