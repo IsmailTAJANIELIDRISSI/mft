@@ -25,21 +25,21 @@ function App() {
     <>
       <AppLoader />
       <div className="min-h-screen bg-mft-bg text-mft-grey-dark font-sans selection:bg-mft-orange selection:text-white">
-      <Navbar />
+        <Navbar />
 
-      <main>
-        <Hero />
-        <About />
-        <Services />
-        <Formation />
-        <Process />
-        <Equipment />
-        <WhyMFT />
-        <Contact />
-      </main>
+        <main>
+          <Hero />
+          <About />
+          <Services />
+          <Formation />
+          <Process />
+          <Equipment />
+          <WhyMFT />
+          <Contact />
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
     </>
   );
 }
