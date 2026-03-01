@@ -1,33 +1,68 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Wrench, Leaf, ShieldCheck } from "lucide-react";
 import aboutBackground from "../../assets/image/about-background.png";
 import LazyImage from "../ui/LazyImage";
+import { useRef } from "react";
+
+const features = [
+  {
+    icon: <Wrench size={22} />,
+    title: "Expertise Technique",
+    desc: "Équipes certifiées et expérimentées pour garantir la fiabilité de vos installations.",
+    accent: "mft-orange",
+  },
+  {
+    icon: <Leaf size={22} />,
+    title: "Engagement Environnemental",
+    desc: "Solutions conformes aux normes environnementales les plus strictes.",
+    accent: "mft-green",
+  },
+  {
+    icon: <ShieldCheck size={22} />,
+    title: "Équipements Certifiés",
+    desc: "Équipements de référence mondiale, fiables et performants.",
+    accent: "mft-orange",
+  },
+];
 
 const About = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+
   return (
-    <section id="about" className="py-24 lg:py-32 bg-white overflow-hidden">
-      <div className="container mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Content Side */}
+    <section
+      ref={sectionRef}
+      id="about"
+      className="py-24 lg:py-32 bg-[#0d0d0d] overflow-hidden relative"
+    >
+      <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "radial-gradient(white 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+      <div className="absolute left-0 top-0 w-[500px] h-[500px] bg-mft-orange/5 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="container mx-auto px-6 lg:px-12 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="order-2 lg:order-1"
           >
-            <div className="inline-block mb-6 relative">
-              <span className="text-mft-orange uppercase tracking-widest text-xs font-bold bg-mft-orange/10 px-4 py-2 rounded-full">
-                À PROPOS
-              </span>
-            </div>
+            <span className="text-mft-orange uppercase tracking-widest text-xs font-bold mb-6 inline-block">
+              À PROPOS
+            </span>
 
-            <h2 className="font-heading font-bold text-4xl lg:text-5xl tracking-tight text-mft-dark mb-6 leading-tight">
-              Maghreb Fueling <br />
-              <span className="text-mft-orange">Technologies</span>
+            <h2 className="font-heading font-extrabold text-4xl lg:text-5xl tracking-tight text-white mb-6 leading-tight">
+              Maghreb Fueling{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-mft-orange to-mft-orange-light">
+                Technologies
+              </span>
             </h2>
 
-            <div className="prose prose-lg text-mft-grey-dark mb-10 max-w-none">
+            <div className="space-y-4 text-white/60 mb-10 text-[15px] leading-relaxed">
               <p>
                 Maghreb Fueling Technologie est une entreprise spécialisée dans
                 les solutions techniques et les services pour les installations
@@ -41,89 +76,70 @@ const About = () => {
               </p>
             </div>
 
-            <div className="space-y-6">
-              <div className="flex gap-4 items-start p-4 rounded-xl bg-mft-bg border border-gray-100 hover:border-mft-orange/30 hover:shadow-lg hover:shadow-mft-orange/5 transition-all">
-                <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center flex-shrink-0 text-mft-orange">
-                  <Wrench size={24} />
-                </div>
-                <div>
-                  <h4 className="font-heading font-bold text-lg text-mft-dark mb-1">
-                    Expertise Technique
-                  </h4>
-                  <p className="text-sm text-mft-grey">
-                    Équipes certifiées et expérimentées pour garantir la
-                    fiabilité de vos installations.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4 items-start p-4 rounded-xl bg-mft-bg border border-gray-100 hover:border-mft-green/30 hover:shadow-lg hover:shadow-mft-green/5 transition-all">
-                <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center flex-shrink-0 text-mft-green">
-                  <Leaf size={24} />
-                </div>
-                <div>
-                  <h4 className="font-heading font-bold text-lg text-mft-dark mb-1">
-                    Engagement Environnemental
-                  </h4>
-                  <p className="text-sm text-mft-grey">
-                    Solutions conformes aux normes environnementales les plus
-                    strictes.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4 items-start p-4 rounded-xl bg-mft-bg border border-gray-100 hover:border-mft-orange/30 hover:shadow-lg hover:shadow-mft-orange/5 transition-all">
-                <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center flex-shrink-0 text-mft-orange">
-                  <ShieldCheck size={24} />
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold text-white mb-2">
-                    Équipements certifiés
-                  </h4>
-                  <p className="text-sm text-mft-grey">
-                    Équipements de référence mondiale, fiables et performants.
-                  </p>
-                </div>
-              </div>
+            <div className="space-y-4">
+              {features.map((feat, i) => (
+                <motion.div
+                  key={feat.title}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                  className={`group flex gap-4 items-start p-5 rounded-3xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-white/[0.15] transition-all duration-300 hover:-translate-y-0.5 backdrop-blur-md`}
+                >
+                  <div
+                    className={`w-12 h-12 rounded-xl bg-white/[0.05] border border-white/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 ${i % 2 === 0 ? "text-mft-orange" : "text-mft-green"}`}
+                  >
+                    {feat.icon}
+                  </div>
+                  <div>
+                    <h4 className="font-heading font-bold text-base text-white mb-1">
+                      {feat.title}
+                    </h4>
+                    <p className="text-sm text-white/50 leading-relaxed">
+                      {feat.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
 
-          {/* Image Side */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="order-1 lg:order-2 relative"
           >
-            {/* Abstract background shape */}
-            <div className="absolute top-10 -right-10 w-[110%] h-[110%] bg-mft-bg rounded-[3rem] -z-10 rotate-3 transform origin-bottom-right"></div>
+            <div className="absolute top-8 -right-8 w-[105%] h-[105%] border border-white/[0.05] rounded-[2rem] -z-10 rotate-2" />
 
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-mft-dark/10 group">
+            <motion.div
+              style={{ y: imageY }}
+              className="relative rounded-2xl overflow-hidden shadow-2xl group border border-white/10"
+            >
               <LazyImage
                 src={aboutBackground}
-                alt="MFT Technicians at work"
-                wrapperClassName="w-full h-[600px]"
-                className="w-full h-full object-cover object-center transform transition-transform duration-700 group-hover:scale-105"
+                alt="MFT en action"
+                wrapperClassName="w-full h-[560px]"
+                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 border-8 border-white rounded-2xl z-10 pointer-events-none"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d0d]/80 via-[#0d0d0d]/20 to-transparent" />
+            </motion.div>
 
-              {/* Orange corner accent */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-mft-orange rounded-bl-full opacity-90 z-20 pointer-events-none"></div>
-            </div>
-
-            {/* Floating badge */}
-            <div
-              className="absolute -left-8 md:-left-12 bottom-12 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 max-w-[200px] z-30 animate-bounce"
-              style={{ animationDuration: "3s" }}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.5, type: "spring" }}
+              className="absolute -left-6 md:-left-10 bottom-10 bg-white/[0.05] backdrop-blur-xl p-6 rounded-2xl shadow-xl border border-white/10 z-30"
             >
-              <div className="font-heading font-extrabold text-4xl text-mft-dark mb-1">
+              <div className="font-heading font-extrabold text-4xl text-white mb-1">
                 100%
               </div>
-              <div className="text-sm font-bold text-mft-orange leading-tight uppercase">
+              <div className="text-[10px] font-bold text-mft-orange uppercase tracking-widest">
                 Solutions sur mesure
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
