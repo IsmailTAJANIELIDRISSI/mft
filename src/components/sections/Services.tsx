@@ -116,7 +116,6 @@ const Services = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {servicesSet.map((service, i) => {
             const isHovered = hoveredIndex === i;
-            const isBlurred = hoveredIndex !== null && !isHovered;
 
             return (
               <motion.div
@@ -146,11 +145,9 @@ const Services = () => {
                     backgroundImage: `url(${service.image})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    filter: isBlurred
-                      ? "brightness(0.5) saturate(0.5) contrast(1.2) blur(20px)"
-                      : isHovered
-                        ? "brightness(0.85) saturate(1.3) contrast(0.9)"
-                        : "brightness(0.72) saturate(1.1) contrast(0.88)",
+                    filter: isHovered
+                      ? "brightness(0.85) saturate(1.3) contrast(0.9)"
+                      : "brightness(0.72) saturate(1.1) contrast(0.88)",
                     transform: isHovered
                       ? "scale(1.05) translateZ(0)"
                       : "scale(1) translateZ(0)",

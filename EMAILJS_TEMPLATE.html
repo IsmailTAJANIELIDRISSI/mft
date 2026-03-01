@@ -4,6 +4,88 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nouvelle demande MFT</title>
+    <style>
+      /* ── Email client resets ── */
+      body,
+      table,
+      td,
+      a {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      }
+      table,
+      td {
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+        border-collapse: collapse;
+      }
+      img {
+        border: 0;
+        height: auto;
+        line-height: 100%;
+        outline: none;
+        text-decoration: none;
+      }
+
+      /* ── Mobile responsive (≤ 620 px) ── */
+      @media only screen and (max-width: 620px) {
+        .email-wrapper {
+          padding: 16px 8px !important;
+        }
+        .email-body {
+          width: 100% !important;
+          max-width: 100% !important;
+        }
+        .hd-cell {
+          padding: 24px 20px !important;
+        }
+        .bd-cell {
+          padding: 24px 20px !important;
+        }
+        .ft-cell {
+          padding: 18px 20px !important;
+        }
+        .brand-title {
+          font-size: 22px !important;
+        }
+        .new-badge {
+          font-size: 10px !important;
+          padding: 5px 10px !important;
+        }
+
+        /* Stack email/phone columns */
+        .col-wrap {
+          display: block !important;
+          width: 100% !important;
+        }
+        .col-left {
+          display: block !important;
+          width: 100% !important;
+          padding: 0 0 12px 0 !important;
+        }
+        .col-spacer {
+          display: none !important;
+        }
+        .col-right {
+          display: block !important;
+          width: 100% !important;
+          padding: 0 !important;
+        }
+
+        /* CTA button full-width on mobile */
+        .cta-btn {
+          padding: 13px 20px !important;
+          font-size: 12px !important;
+        }
+
+        /* Footer right aligned → block on mobile */
+        .ft-right {
+          display: block !important;
+          text-align: left !important;
+          margin-top: 8px !important;
+        }
+      }
+    </style>
   </head>
   <body
     style="
@@ -14,6 +96,7 @@
     "
   >
     <table
+      class="email-wrapper"
       width="100%"
       cellpadding="0"
       cellspacing="0"
@@ -22,6 +105,7 @@
       <tr>
         <td align="center">
           <table
+            class="email-body"
             width="600"
             cellpadding="0"
             cellspacing="0"
@@ -30,6 +114,7 @@
             <!-- Header -->
             <tr>
               <td
+                class="hd-cell"
                 style="
                   background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);
                   border-radius: 16px 16px 0 0;
@@ -41,6 +126,7 @@
                   <tr>
                     <td>
                       <span
+                        class="brand-title"
                         style="
                           font-size: 28px;
                           font-weight: 900;
@@ -58,11 +144,13 @@
                           letter-spacing: 3px;
                           margin-top: 4px;
                         "
-                        >Matériaux & Fournitures Techniques</span
                       >
+                        Matériaux &amp; Fournitures Techniques
+                      </span>
                     </td>
-                    <td align="right">
+                    <td align="right" valign="middle">
                       <span
+                        class="new-badge"
                         style="
                           display: inline-block;
                           background: #e87722;
@@ -73,6 +161,7 @@
                           letter-spacing: 2px;
                           padding: 6px 14px;
                           border-radius: 20px;
+                          white-space: nowrap;
                         "
                       >
                         Nouvelle Demande
@@ -85,7 +174,10 @@
 
             <!-- Body -->
             <tr>
-              <td style="background-color: #1a1a1a; padding: 40px">
+              <td
+                class="bd-cell"
+                style="background-color: #1a1a1a; padding: 40px"
+              >
                 <p
                   style="
                     margin: 0 0 28px;
@@ -184,12 +276,18 @@
                     </td>
                   </tr>
 
-                  <!-- Email + Phone side by side (stacked in email clients) -->
+                  <!-- Email + Phone (side-by-side on desktop, stacked on mobile) -->
                   <tr>
                     <td style="padding: 0 0 16px">
                       <table width="100%" cellpadding="0" cellspacing="0">
                         <tr>
-                          <td width="48%" style="padding-right: 8px">
+                          <!-- Email col -->
+                          <td
+                            class="col-left"
+                            width="48%"
+                            valign="top"
+                            style="padding-right: 8px"
+                          >
                             <table
                               width="100%"
                               cellpadding="0"
@@ -220,6 +318,7 @@
                                       font-weight: 600;
                                       color: #e87722;
                                       text-decoration: none;
+                                      word-break: break-all;
                                     "
                                     >{{email}}</a
                                   >
@@ -227,8 +326,15 @@
                               </tr>
                             </table>
                           </td>
-                          <td width="4%"></td>
-                          <td width="48%" style="padding-left: 8px">
+                          <!-- Gap -->
+                          <td class="col-spacer" width="4%"></td>
+                          <!-- Phone col -->
+                          <td
+                            class="col-right"
+                            width="48%"
+                            valign="top"
+                            style="padding-left: 8px"
+                          >
                             <table
                               width="100%"
                               cellpadding="0"
@@ -349,6 +455,7 @@
                                 font-size: 14px;
                                 color: #ccc;
                                 line-height: 1.7;
+                                word-break: break-word;
                               "
                             >
                               {{message}}
@@ -370,6 +477,7 @@
                   <tr>
                     <td align="center">
                       <a
+                        class="cta-btn"
                         href="mailto:{{email}}"
                         style="
                           display: inline-block;
@@ -395,6 +503,7 @@
             <!-- Footer -->
             <tr>
               <td
+                class="ft-cell"
                 style="
                   background: #111;
                   border-radius: 0 0 16px 16px;
@@ -404,15 +513,18 @@
               >
                 <table width="100%" cellpadding="0" cellspacing="0">
                   <tr>
-                    <td>
-                      <span style="font-size: 12px; color: #555">
-                        © 2026 <strong style="color: #e87722">MFT</strong> —
+                    <td valign="middle">
+                      <span
+                        style="font-size: 12px; color: #555; line-height: 1.8"
+                      >
+                        &copy; 2026
+                        <strong style="color: #e87722">MFT</strong> —
                         Mohammedia, Maroc<br />
                         Email reçu depuis le formulaire de contact sur
                         <span style="color: #e87722">mft.ma</span>
                       </span>
                     </td>
-                    <td align="right">
+                    <td class="ft-right" align="right" valign="middle">
                       <span style="font-size: 11px; color: #444"
                         >mft@mft.ma</span
                       >

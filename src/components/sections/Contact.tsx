@@ -13,9 +13,9 @@ import emailjs from "@emailjs/browser";
 import EnergyLines from "../ui/EnergyLines";
 
 // ─── Replace these three values with your EmailJS credentials ───
-const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+const EMAILJS_SERVICE_ID = "service_lhqh94r";
+const EMAILJS_TEMPLATE_ID = "template_gtxlqm8";
+const EMAILJS_PUBLIC_KEY = "hoCp_hxwJl_7sl206";
 // ────────────────────────────────────────────────────────────────
 
 const contactInfo = [
