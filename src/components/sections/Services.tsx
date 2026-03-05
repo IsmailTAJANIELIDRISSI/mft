@@ -59,19 +59,19 @@ const Services = () => {
   return (
     <section
       id="services"
-      className="py-24 lg:py-32 bg-[#080808] relative overflow-hidden"
+      className="py-24 lg:py-32 bg-transparent relative overflow-hidden"
     >
       <EnergyLines lineCount={20} baseHue={25} hueRange={80} opacity={0.12} />
 
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.06]"
         style={{
-          backgroundImage: "radial-gradient(white 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
+          backgroundImage: "radial-gradient(#E87722 1px, transparent 1px)",
+          backgroundSize: "30px 30px",
         }}
       />
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-mft-orange/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-mft-green/4 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-mft-orange/15 to-transparent blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[380px] h-[380px] bg-mft-green/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         {/* Section header */}
@@ -146,12 +146,10 @@ const Services = () => {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     filter: isHovered
-                      ? "brightness(0.85) saturate(1.3) contrast(0.9)"
+                      ? "brightness(0.84) saturate(1.22) contrast(0.92)"
                       : "brightness(0.72) saturate(1.1) contrast(0.88)",
-                    transform: isHovered
-                      ? "scale(1.05) translateZ(0)"
-                      : "scale(1) translateZ(0)",
-                    transition: "filter 220ms linear, transform 220ms linear",
+                    transform: "scale(1) translateZ(0)",
+                    transition: "filter 220ms linear",
                     transformOrigin: "center",
                   }}
                 />
@@ -165,13 +163,38 @@ const Services = () => {
                   }}
                 />
 
+                {/* Premium glass hover layer without heavy shadow */}
+                <div
+                  className="absolute inset-0 rounded-3xl pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(120deg, rgba(255,255,255,0.08), rgba(255,255,255,0.00) 45%, rgba(124,181,24,0.10) 100%)",
+                    opacity: isHovered ? 1 : 0,
+                    transition: "opacity 220ms ease",
+                  }}
+                />
+
                 {/* Top accent line on hover */}
                 <div
                   className="absolute top-0 left-0 right-0 h-[3px] rounded-t-3xl pointer-events-none"
                   style={{
-                    background: service.color,
+                    background:
+                      service.color === "#7CB518"
+                        ? "linear-gradient(to right, #7CB518, #E87722, #7A7A7A)"
+                        : "linear-gradient(to right, #E87722, #7CB518, #7A7A7A)",
                     opacity: isHovered ? 1 : 0,
                     transition: "opacity 220ms linear",
+                  }}
+                />
+
+                {/* Clean border highlight on hover */}
+                <div
+                  className="absolute inset-0 rounded-3xl pointer-events-none"
+                  style={{
+                    border: isHovered
+                      ? `1px solid ${service.color}80`
+                      : "1px solid rgba(255,255,255,0.08)",
+                    transition: "border-color 220ms ease",
                   }}
                 />
 

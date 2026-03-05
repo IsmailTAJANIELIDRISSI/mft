@@ -38,7 +38,7 @@ const About = () => {
     <section
       ref={sectionRef}
       id="about"
-      className="py-24 lg:py-32 bg-[#0d0d0d] overflow-hidden relative"
+      className="py-24 lg:py-32 bg-transparent overflow-hidden relative"
     >
       <EnergyLines lineCount={20} baseHue={25} hueRange={80} opacity={0.15} />
       <div

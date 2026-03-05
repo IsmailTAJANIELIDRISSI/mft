@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
 import LazyImage from "../ui/LazyImage";
 import ActivityModal from "../ui/ActivityModal";
+import EnergyLines from "../ui/EnergyLines";
 import { activities, type Activity } from "../../data/activities";
 
 const CARDS_PER_PAGE = 3;
@@ -56,11 +57,19 @@ const Activities = () => {
     <>
       <section
         id="activites"
-        className="py-24 lg:py-32 bg-mft-dark relative overflow-hidden"
+        className="py-24 lg:py-32 bg-transparent relative overflow-hidden"
       >
+        <EnergyLines lineCount={20} baseHue={25} hueRange={80} opacity={0.12} />
+        <div
+          className="absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage: "radial-gradient(#E87722 1px, transparent 1px)",
+            backgroundSize: "30px 30px",
+          }}
+        />
         {/* Ambient glows */}
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-mft-orange/6 rounded-full blur-[150px] pointer-events-none" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-mft-green/4 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-mft-orange/15 to-transparent blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-[380px] h-[380px] bg-mft-green/10 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="container mx-auto px-6 lg:px-12 relative">
           {/* Header + nav */}

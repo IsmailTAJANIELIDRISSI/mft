@@ -78,7 +78,7 @@ const Process = () => {
   }, [handleMouseMove]);
 
   return (
-    <section className="py-24 lg:py-32 bg-[#0A0A0A] overflow-hidden relative">
+    <section className="py-24 lg:py-32 bg-transparent overflow-hidden relative">
       <EnergyLines lineCount={20} baseHue={25} hueRange={80} opacity={0.12} />
       <div
         className="absolute inset-0 opacity-[0.02]"
@@ -299,8 +299,6 @@ const Process = () => {
                         onMouseLeave={() => setActiveStep(null)}
                         whileHover={{ y: -4, transition: { duration: 0.25 } }}
                       >
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-full pointer-events-none" />
-
                         {/* Pulsing dot indicator */}
                         <div
                           className={`absolute top-6 ${

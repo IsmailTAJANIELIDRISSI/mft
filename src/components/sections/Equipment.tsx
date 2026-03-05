@@ -38,7 +38,7 @@ const Equipment = () => {
   return (
     <section
       id="equipement"
-      className="py-24 lg:py-32 bg-[#121418] relative overflow-hidden"
+      className="py-24 lg:py-32 bg-transparent relative overflow-hidden"
     >
       <EnergyLines lineCount={20} baseHue={25} hueRange={80} opacity={0.12} />
       <div
@@ -106,13 +106,6 @@ const Equipment = () => {
                 glowColor={cat.color}
                 className="p-8 backdrop-blur-md flex flex-col items-center text-center hover:-translate-y-2 transition-transform duration-500"
               >
-                {/* Animated top beam */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] overflow-hidden">
-                  <div
-                    className="h-full w-1/3 bg-gradient-to-r from-transparent via-mft-orange to-transparent"
-                    style={{ animation: "gradient-x 3s ease-in-out infinite" }}
-                  />
-                </div>
 
                 {/* Number watermark */}
                 <span className="absolute top-3 right-4 text-5xl font-heading font-extrabold text-white/[0.03] transition-colors duration-500 group-hover:text-mft-orange/10 select-none">
@@ -120,16 +113,22 @@ const Equipment = () => {
                 </span>
 
                 <div
-                  className={`w-20 h-20 rounded-2xl bg-white/[0.05] border border-white/10 flex items-center justify-center text-white mb-6 transition-all duration-500 group-hover:scale-110 shadow-lg ${
-                    cat.color === "orange"
-                      ? "group-hover:bg-mft-orange group-hover:border-mft-orange group-hover:shadow-mft-orange/30"
-                      : "group-hover:bg-mft-green group-hover:border-mft-green group-hover:shadow-mft-green/30"
-                  }`}
+                  className="w-20 h-20 rounded-2xl p-[1px] mb-6 transition-all duration-500 group-hover:scale-110 shadow-lg"
                   style={{
                     animation: `float 5s ease-in-out ${i * 0.5}s infinite`,
+                    background:
+                      "linear-gradient(130deg, rgba(232,119,34,0.9), rgba(124,181,24,0.85), rgba(122,122,122,0.85))",
                   }}
                 >
-                  {cat.icon}
+                  <div
+                    className={`w-full h-full rounded-2xl bg-white/[0.05] border border-white/10 flex items-center justify-center text-white transition-all duration-500 ${
+                      cat.color === "orange"
+                        ? "group-hover:bg-mft-orange/80 group-hover:border-mft-orange group-hover:shadow-mft-orange/30"
+                        : "group-hover:bg-mft-green/80 group-hover:border-mft-green group-hover:shadow-mft-green/30"
+                    }`}
+                  >
+                    {cat.icon}
+                  </div>
                 </div>
                 <h4 className="font-heading font-bold text-lg text-white mb-3">
                   {cat.name}
