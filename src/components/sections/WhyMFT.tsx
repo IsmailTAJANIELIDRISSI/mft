@@ -32,7 +32,7 @@ const reasons = [
 
 const WhyMFT = () => {
   return (
-    <section className="py-24 lg:py-32 bg-[#0A0A0A] relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-transparent relative overflow-hidden">
       <EnergyLines lineCount={20} baseHue={25} hueRange={80} opacity={0.12} />
       <div
         className="absolute inset-0 opacity-[0.03]"

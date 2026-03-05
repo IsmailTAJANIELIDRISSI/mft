@@ -93,10 +93,10 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-24 lg:py-32 bg-mft-dark overflow-hidden relative"
+      className="py-24 lg:py-32 bg-transparent overflow-hidden relative"
     >
       <EnergyLines lineCount={20} baseHue={25} hueRange={80} opacity={0.12} />
-      <div className="absolute inset-0 bg-gradient-to-b from-mft-dark/60 to-[#111111]/80 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0f1218]/35 to-[#0b0f14]/60 pointer-events-none" />
       <div className="absolute right-0 bottom-0 w-[600px] h-[600px] bg-mft-orange/8 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10">

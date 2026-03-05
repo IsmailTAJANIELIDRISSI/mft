@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Factory,
   Fuel,
   Container,
   ChevronRight,
+  ChevronLeft,
+  X,
   Building2,
   ShieldCheck,
   Gauge,
@@ -124,14 +126,58 @@ const tabs = [
   },
 ];
 
+const b2bGalleryImages = Array.from({ length: 14 }, (_, index) => {
+  const num = String(index + 1).padStart(2, "0");
+  return `/images/realisations/b2b/img-${num}.jpeg`;
+});
+
 const Realisations = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [galleryIndex, setGalleryIndex] = useState(0);
   const active = tabs[activeTab];
+
+  const openGallery = () => {
+    setGalleryIndex(0);
+    setIsGalleryOpen(true);
+  };
+
+  const closeGallery = () => setIsGalleryOpen(false);
+
+  const goPrev = () => {
+    setGalleryIndex((prev) =>
+      prev === 0 ? b2bGalleryImages.length - 1 : prev - 1
+    );
+  };
+
+  const goNext = () => {
+    setGalleryIndex((prev) =>
+      prev === b2bGalleryImages.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  useEffect(() => {
+    if (!isGalleryOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeGallery();
+      if (event.key === "ArrowLeft") goPrev();
+      if (event.key === "ArrowRight") goNext();
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = "unset";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isGalleryOpen]);
 
   return (
     <section
       id="realisations"
-      className="py-16 lg:py-20 bg-mft-dark relative overflow-hidden"
+      className="py-16 lg:py-20 bg-transparent relative overflow-hidden"
     >
       <EnergyLines lineCount={12} baseHue={30} hueRange={70} opacity={0.08} />
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-mft-orange/6 rounded-full blur-[150px] pointer-events-none" />
@@ -256,16 +302,87 @@ const Realisations = () => {
                 ))}
               </div>
 
-              <div className="flex items-center gap-2 pt-4 border-t border-white/[0.08]">
-                <ChevronRight size={15} className="text-mft-orange shrink-0" />
-                <p className="text-white/45 text-xs italic leading-relaxed">
-                  {active.conclusion}
-                </p>
+              <div className="pt-4 border-t border-white/[0.08] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div className="flex items-center gap-2">
+                  <ChevronRight size={15} className="text-mft-orange shrink-0" />
+                  <p className="text-white/45 text-xs italic leading-relaxed">
+                    {active.conclusion}
+                  </p>
+                </div>
+
+                {active.id === "b2b" ? (
+                  <button
+                    onClick={openGallery}
+                    className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider text-white border border-white/25 bg-white/[0.03] backdrop-blur-sm hover:border-mft-orange/60 hover:text-mft-orange hover:bg-mft-orange/10 transition-all duration-300"
+                  >
+                    Voir les images
+                    <ChevronRight size={14} />
+                  </button>
+                ) : null}
               </div>
             </motion.div>
           </AnimatePresence>
         </div>
       </div>
+
+      <AnimatePresence>
+        {isGalleryOpen ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6"
+            onClick={closeGallery}
+          >
+            <div className="absolute inset-0 bg-[#0A0F16]/70 backdrop-blur-md" />
+
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.97 }}
+              transition={{ duration: 0.25 }}
+              className="relative z-10 w-full max-w-5xl"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <button
+                onClick={closeGallery}
+                className="cursor-pointer absolute -top-3 -right-3 sm:top-3 sm:right-3 z-20 w-10 h-10 rounded-full bg-black/40 border border-white/20 backdrop-blur-sm text-white hover:bg-black/60 transition-colors flex items-center justify-center"
+              >
+                <X size={18} />
+              </button>
+
+              <div className="relative rounded-3xl overflow-hidden border border-white/15 bg-black/20 backdrop-blur-sm shadow-[0_30px_70px_rgba(0,0,0,0.55)]">
+                <img
+                  src={b2bGalleryImages[galleryIndex]}
+                  alt={`Réalisation B2B ${galleryIndex + 1}`}
+                  className="w-full h-[65vh] object-cover"
+                />
+
+                <div className="absolute inset-0 pointer-events-none ring-1 ring-white/10 rounded-3xl" />
+
+                <button
+                  onClick={goPrev}
+                  className="cursor-pointer absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/40 border border-white/20 backdrop-blur-sm text-white hover:bg-black/60 transition-colors flex items-center justify-center"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+
+                <button
+                  onClick={goNext}
+                  className="cursor-pointer absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/40 border border-white/20 backdrop-blur-sm text-white hover:bg-black/60 transition-colors flex items-center justify-center"
+                >
+                  <ChevronRight size={20} />
+                </button>
+
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-black/45 border border-white/20 text-white/85 text-xs font-semibold tracking-wide backdrop-blur-sm">
+                  {galleryIndex + 1} / {b2bGalleryImages.length}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </section>
   );
 };

@@ -32,19 +32,25 @@ const Footer = () => {
             </p>
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://www.facebook.com/share/18GT57nj4P/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noreferrer"
                 className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-mft-orange hover:text-white transition-all"
               >
                 <Facebook size={18} />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/mft_maroc?igsh=MTdrZHF1ZncxMjQ0Ng%3D%3D&utm_source=qr"
+                target="_blank"
+                rel="noreferrer"
                 className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-mft-orange hover:text-white transition-all"
               >
                 <Instagram size={18} />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/company/mft0/"
+                target="_blank"
+                rel="noreferrer"
                 className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-mft-orange hover:text-white transition-all"
               >
                 <Linkedin size={18} />
