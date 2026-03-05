@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import heroBackground from "../../assets/image/hero-background.png";
+import heroBackground from "../../assets/image/image.png";
 import heroMobileBackground from "../../assets/image/hero-background-mobile.png";
 
 const Hero = () => {
