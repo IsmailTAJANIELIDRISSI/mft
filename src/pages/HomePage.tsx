@@ -8,6 +8,7 @@ import Activities from "../components/sections/Activities";
 import Realisations from "../components/sections/Realisations";
 import Equipment from "../components/sections/Equipment";
 import WhyMFT from "../components/sections/WhyMFT";
+import References from "../components/sections/References";
 import Contact from "../components/sections/Contact";
 
 const HomePage = () => {
@@ -17,12 +18,13 @@ const HomePage = () => {
       <main>
         <Hero />
         <About />
+        <Activities />
         <Services />
         <Process />
-        <Activities />
         <Realisations />
         <Equipment />
         <WhyMFT />
+        <References />
         <Contact />
       </main>
       <Footer />

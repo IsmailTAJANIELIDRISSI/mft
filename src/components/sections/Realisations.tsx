@@ -34,7 +34,7 @@ const tabs = [
     bullets: [
       {
         icon: <Pipette size={16} />,
-        text: "Installations carburant pour flottes privées",
+        text: "Mise en place des installations des équipement pour le carburant",
       },
       {
         icon: <ShieldCheck size={16} />,
@@ -50,7 +50,7 @@ const tabs = [
       },
       {
         icon: <Wrench size={16} />,
-        text: "Travaux de construction métallique et supports techniques",
+        text: "Travaux de construction métallique ",
       },
     ],
     conclusion:
@@ -93,7 +93,7 @@ const tabs = [
   {
     id: "depots",
     label: "Dépôts",
-    sublabel: "Stockage",
+    sublabel: "pétrolier",
     icon: <Container size={18} />,
     color: "from-[#2A2A2A] to-mft-dark",
     title: "Réalisations Dépôts carburant & infrastructures de stockage",
@@ -126,18 +126,87 @@ const tabs = [
   },
 ];
 
-const b2bGalleryImages = Array.from({ length: 14 }, (_, index) => {
-  const num = String(index + 1).padStart(2, "0");
-  return `/images/realisations/b2b/img-${num}.jpeg`;
-});
+const EXTENSIONS = [".jpeg", ".jpg", ".png"];
+
+const galleryImagesByTab: Record<string, string[]> = {
+  b2b: Array.from({ length: 14 }, (_, i) =>
+    `/images/realisations/b2b/img-${String(i + 1).padStart(2, "0")}.jpeg`
+  ),
+  b2c: Array.from({ length: 14 }, (_, i) =>
+    `/images/realisations/b2c/img-${String(i + 1).padStart(2, "0")}.jpeg`
+  ),
+  depots: Array.from({ length: 8 }, (_, i) =>
+    `/images/realisations/depots/img-${String(i + 1).padStart(2, "0")}.jpeg`
+  ),
+};
+
+const GalleryImage = ({
+  src,
+  alt,
+  className,
+}: {
+  src: string;
+  alt: string;
+  className: string;
+}) => {
+  const base = src.replace(/\.(jpeg|jpg|png)$/i, "");
+  const [currentSrc, setCurrentSrc] = useState(`${base}.jpeg`);
+  const [extIndex, setExtIndex] = useState(0);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setCurrentSrc(src);
+    setExtIndex(0);
+    setHasError(false);
+  }, [src]);
+
+  const handleError = () => {
+    const next = extIndex + 1;
+    if (next < EXTENSIONS.length) {
+      setCurrentSrc(`${base}${EXTENSIONS[next]}`);
+      setExtIndex(next);
+    } else {
+      setHasError(true);
+    }
+  };
+
+  if (hasError) {
+    return (
+      <div
+        className={`${className} flex flex-col items-center justify-center bg-white/[0.03] border border-white/10`}
+      >
+        <p className="text-white/50 text-sm text-center px-6">
+          Image non disponible. Placez vos images dans{" "}
+          <code className="text-mft-orange/80">
+            public/images/realisations/
+            {src.includes("b2c") ? "b2c" : src.includes("depots") ? "depots" : "b2b"}/
+          </code>{" "}
+          avec les noms img-01.jpeg, img-02.jpeg, etc.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={currentSrc}
+      alt={alt}
+      className={className}
+      onError={handleError}
+    />
+  );
+};
 
 const Realisations = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [galleryIndex, setGalleryIndex] = useState(0);
+  const [galleryTab, setGalleryTab] = useState<string>("b2b");
   const active = tabs[activeTab];
+  const currentGalleryImages = galleryImagesByTab[galleryTab] ?? [];
 
   const openGallery = () => {
+    setGalleryTab(active.id);
     setGalleryIndex(0);
     setIsGalleryOpen(true);
   };
@@ -146,13 +215,13 @@ const Realisations = () => {
 
   const goPrev = () => {
     setGalleryIndex((prev) =>
-      prev === 0 ? b2bGalleryImages.length - 1 : prev - 1
+      prev === 0 ? currentGalleryImages.length - 1 : prev - 1
     );
   };
 
   const goNext = () => {
     setGalleryIndex((prev) =>
-      prev === b2bGalleryImages.length - 1 ? 0 : prev + 1
+      prev === currentGalleryImages.length - 1 ? 0 : prev + 1
     );
   };
 
@@ -310,15 +379,13 @@ const Realisations = () => {
                   </p>
                 </div>
 
-                {active.id === "b2b" ? (
-                  <button
-                    onClick={openGallery}
-                    className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider text-white border border-white/25 bg-white/[0.03] backdrop-blur-sm hover:border-mft-orange/60 hover:text-mft-orange hover:bg-mft-orange/10 transition-all duration-300"
-                  >
-                    Voir les images
-                    <ChevronRight size={14} />
-                  </button>
-                ) : null}
+                <button
+                  onClick={openGallery}
+                  className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider text-white border border-white/25 bg-white/[0.03] backdrop-blur-sm hover:border-mft-orange/60 hover:text-mft-orange hover:bg-mft-orange/10 transition-all duration-300"
+                >
+                  Voir les images
+                  <ChevronRight size={14} />
+                </button>
               </div>
             </motion.div>
           </AnimatePresence>
@@ -353,9 +420,9 @@ const Realisations = () => {
               </button>
 
               <div className="relative rounded-3xl overflow-hidden border border-white/15 bg-black/20 backdrop-blur-sm shadow-[0_30px_70px_rgba(0,0,0,0.55)]">
-                <img
-                  src={b2bGalleryImages[galleryIndex]}
-                  alt={`Réalisation B2B ${galleryIndex + 1}`}
+                <GalleryImage
+                  src={currentGalleryImages[galleryIndex]}
+                  alt={`Réalisation ${tabs.find((t) => t.id === galleryTab)?.label ?? galleryTab} ${galleryIndex + 1}`}
                   className="w-full h-[65vh] object-cover"
                 />
 
@@ -376,7 +443,7 @@ const Realisations = () => {
                 </button>
 
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-black/45 border border-white/20 text-white/85 text-xs font-semibold tracking-wide backdrop-blur-sm">
-                  {galleryIndex + 1} / {b2bGalleryImages.length}
+                  {galleryIndex + 1} / {currentGalleryImages.length}
                 </div>
               </div>
             </motion.div>
