@@ -58,7 +58,7 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
-  const { language, isRTL } = useLanguage();
+  const { language } = useLanguage();
   const t = translations[language];
 
   const handleChange = (

@@ -84,7 +84,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#equipement"
+                  href="#produits"
                   className="text-sm hover:text-mft-orange transition-colors"
                 >
                   {t.footer.quickLinks[2]}

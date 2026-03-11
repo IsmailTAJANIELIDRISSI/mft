@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../../i18n/LanguageContext";
@@ -7,7 +7,19 @@ import { languages, translations } from "../../i18n/translations";
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
+  const langDropdownRef = useRef<HTMLDivElement>(null);
   const { language, setLanguage, isRTL } = useLanguage();
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (langDropdownRef.current && !langDropdownRef.current.contains(e.target as Node)) {
+        setLangDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
   const t = translations[language];
 
   useEffect(() => {
@@ -75,22 +87,45 @@ const Navbar = () => {
             </div>
 
             <div className="hidden lg:flex items-center gap-3">
-              <div
-                className={`flex items-center rounded-xl border border-white/10 bg-white/[0.03] p-1 ${isRTL ? "flex-row-reverse" : ""}`}
-              >
-                {languages.map((option) => (
-                  <button
-                    key={option.code}
-                    onClick={() => setLanguage(option.code)}
-                    className={`cursor-pointer px-3 py-1.5 rounded-lg text-[11px] font-bold tracking-widest transition-all ${
-                      language === option.code
-                        ? "bg-white text-mft-dark"
-                        : "text-white/65 hover:text-white"
-                    }`}
-                  >
-                    {option.label}
-                  </button>
-                ))}
+              <div ref={langDropdownRef} className="relative">
+                <button
+                  onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                  className={`flex items-center gap-2 px-3 py-2 rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] transition-all text-sm font-bold ${isRTL ? "flex-row-reverse" : ""}`}
+                >
+                  <span className="text-white">{languages.find((l) => l.code === language)?.name}</span>
+                  <ChevronDown
+                    size={12}
+                    className={`text-white/70 transition-transform ${langDropdownOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+                <AnimatePresence>
+                  {langDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -6, scale: 0.96 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -6, scale: 0.96 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute top-full mt-1 right-0 left-0 min-w-[140px] rounded-xl border border-white/10 bg-mft-dark/95 backdrop-blur-xl shadow-xl overflow-hidden z-50"
+                    >
+                      {languages.map((option) => (
+                        <button
+                          key={option.code}
+                          onClick={() => {
+                            setLanguage(option.code);
+                            setLangDropdownOpen(false);
+                          }}
+                          className={`w-full flex items-center px-3 py-2.5 text-left text-sm font-bold transition-colors ${
+                            language === option.code
+                              ? "bg-white/15 text-white"
+                              : "text-white/70 hover:bg-white/10 hover:text-white"
+                          } ${isRTL ? "flex-row-reverse text-right justify-end" : ""}`}
+                        >
+                          {option.name}
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
               <a
                 href="#contact"
@@ -128,22 +163,26 @@ const Navbar = () => {
           >
             <div className="container mx-auto px-6 pt-28 pb-12 min-h-screen flex flex-col">
               <nav className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
-                <div
-                  className={`mb-8 flex items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] p-2 ${isRTL ? "flex-row-reverse" : ""}`}
-                >
-                  {languages.map((option) => (
-                    <button
-                      key={option.code}
-                      onClick={() => setLanguage(option.code)}
-                      className={`cursor-pointer flex-1 rounded-xl px-4 py-3 text-sm font-bold tracking-widest transition-all ${
-                        language === option.code
-                          ? "bg-white text-mft-dark"
-                          : "text-white/70 hover:text-white"
-                      }`}
+                <div className="mb-8">
+                  <label className="block text-white/50 text-xs font-bold uppercase tracking-wider mb-2 px-2">
+                    {t.nav.language}
+                  </label>
+                  <div
+                    className={`flex items-center gap-2 px-4 py-3 rounded-2xl border border-white/10 bg-white/[0.03] ${isRTL ? "flex-row-reverse" : ""}`}
+                  >
+                    <select
+                      value={language}
+                      onChange={(e) => setLanguage(e.target.value as "fr" | "en" | "ar")}
+                      className="flex-1 bg-transparent border-none text-white text-sm font-bold appearance-none cursor-pointer focus:outline-none min-w-0"
                     >
-                      {option.label}
-                    </button>
-                  ))}
+                      {languages.map((option) => (
+                        <option key={option.code} value={option.code} className="bg-mft-dark text-white">
+                          {option.name}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown size={18} className={`text-white/50 ${isRTL ? "rotate-90" : "rotate-[-90deg]"}`} />
+                  </div>
                 </div>
                 <ul className="space-y-4">
                   {navLinks.map((link, i) => (

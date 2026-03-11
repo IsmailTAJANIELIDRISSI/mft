@@ -30,7 +30,7 @@ const features = [
 
 const About = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const { language, isRTL } = useLanguage();
+  const { language } = useLanguage();
   const t = translations[language];
   const { scrollYProgress } = useScroll({
     target: sectionRef,

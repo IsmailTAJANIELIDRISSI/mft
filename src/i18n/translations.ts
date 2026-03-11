@@ -1,9 +1,9 @@
 import type { Language } from "./LanguageContext";
 
 export const languages = [
-  { code: "fr" as Language, label: "FR" },
-  { code: "en" as Language, label: "EN" },
-  { code: "ar" as Language, label: "AR" },
+  { code: "fr" as Language, name: "Français" },
+  { code: "en" as Language, name: "English" },
+  { code: "ar" as Language, name: "العربية" },
 ];
 
 export const translations = {
@@ -13,7 +13,7 @@ export const translations = {
         { name: "Services", href: "#services" },
         { name: "Activités", href: "#activites" },
         { name: "Réalisations", href: "#realisations" },
-        { name: "Équipements", href: "#equipement" },
+        { name: "Produits", href: "#produits" },
         { name: "À Propos", href: "#about" },
         { name: "Références", href: "#references" },
         { name: "Contact", href: "#contact" },
@@ -200,6 +200,14 @@ export const translations = {
         },
       },
     },
+    produits: {
+      label: "PRODUITS",
+      titleBefore: "Nos équipements et",
+      titleHighlight: "solutions techniques",
+      voirDetails: "Voir les détails",
+      fermer: "Fermer",
+      downloadDossier: "Télécharger le dossier technique",
+    },
     equipment: {
       label: "ÉQUIPEMENTS",
       titleBefore: "Équipements certifiés, fiables et",
@@ -291,7 +299,7 @@ export const translations = {
         maintenance: "Maintenance & Dépannage",
         etudes: "Études Techniques",
         formation: "Formation",
-        equipement: "Achat d'Équipement",
+        equipement: "Achat de Produits / Équipement",
         autre: "Autre demande",
       },
       sending: "Envoi en cours…",
@@ -301,7 +309,7 @@ export const translations = {
       brand:
         "Votre partenaire de confiance en équipements pétroliers. De l'étude technique à la mise en service, nous vous accompagnons à chaque étape.",
       quickLinksTitle: "Liens rapides",
-      quickLinks: ["Services", "Activités", "Équipements", "À Propos", "Contacter"],
+      quickLinks: ["Services", "Activités", "Produits", "À Propos", "Contacter"],
       contactTitle: "Contact",
       legalTitle: "Mentions légales / ICE",
       rights: "© 2025 Maghreb Fueling Technologies S.A.R.L. Tous droits réservés.",
@@ -314,7 +322,7 @@ export const translations = {
         { name: "Services", href: "#services" },
         { name: "Activities", href: "#activites" },
         { name: "Projects", href: "#realisations" },
-        { name: "Equipment", href: "#equipement" },
+        { name: "Products", href: "#produits" },
         { name: "About", href: "#about" },
         { name: "References", href: "#references" },
         { name: "Contact", href: "#contact" },
@@ -499,6 +507,14 @@ export const translations = {
         },
       },
     },
+    produits: {
+      label: "PRODUCTS",
+      titleBefore: "Our equipment and",
+      titleHighlight: "technical solutions",
+      voirDetails: "View details",
+      fermer: "Close",
+      downloadDossier: "Download technical brochure",
+    },
     equipment: {
       label: "EQUIPMENT",
       titleBefore: "Certified, reliable, and",
@@ -590,7 +606,7 @@ export const translations = {
         maintenance: "Maintenance & Troubleshooting",
         etudes: "Technical Studies",
         formation: "Training",
-        equipement: "Equipment Purchase",
+        equipement: "Products / Equipment Purchase",
         autre: "Other request",
       },
       sending: "Sending...",
@@ -600,7 +616,7 @@ export const translations = {
       brand:
         "Your trusted partner in petroleum equipment. From technical studies to commissioning, we support you every step of the way.",
       quickLinksTitle: "Quick links",
-      quickLinks: ["Services", "Activities", "Equipment", "About", "Contact"],
+      quickLinks: ["Services", "Activities", "Products", "About", "Contact"],
       contactTitle: "Contact",
       legalTitle: "Legal notice / ICE",
       rights: "© 2025 Maghreb Fueling Technologies S.A.R.L. All rights reserved.",
@@ -613,7 +629,7 @@ export const translations = {
         { name: "الخدمات", href: "#services" },
         { name: "الأنشطة", href: "#activites" },
         { name: "الإنجازات", href: "#realisations" },
-        { name: "المعدات", href: "#equipement" },
+        { name: "المنتجات", href: "#produits" },
         { name: "من نحن", href: "#about" },
         { name: "المرجعيات", href: "#references" },
         { name: "اتصل بنا", href: "#contact" },
@@ -796,6 +812,14 @@ export const translations = {
         },
       },
     },
+    produits: {
+      label: "المنتجات",
+      titleBefore: "معداتنا وحلولنا",
+      titleHighlight: "التقنية",
+      voirDetails: "عرض التفاصيل",
+      fermer: "إغلاق",
+      downloadDossier: "تحميل الملف التقني",
+    },
     equipment: {
       label: "المعدات",
       titleBefore: "معدات معتمدة وموثوقة وذات",
@@ -896,7 +920,7 @@ export const translations = {
       brand:
         "شريككم الموثوق في معدات البترول. من الدراسة التقنية إلى التشغيل، نرافقكم في كل مرحلة.",
       quickLinksTitle: "روابط سريعة",
-      quickLinks: ["الخدمات", "الأنشطة", "المعدات", "من نحن", "اتصل بنا"],
+      quickLinks: ["الخدمات", "الأنشطة", "المنتجات", "من نحن", "اتصل بنا"],
       contactTitle: "اتصل بنا",
       legalTitle: "المعلومات القانونية / ICE",
       rights: "© 2025 Maghreb Fueling Technologies S.A.R.L. جميع الحقوق محفوظة.",
