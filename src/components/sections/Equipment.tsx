@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Fuel, Droplets, GaugeCircle, ShieldAlert } from "lucide-react";
 import GlowCard from "../ui/GlowCard";
 import EnergyLines from "../ui/EnergyLines";
+import { useLanguage } from "../../i18n/LanguageContext";
+import { translations } from "../../i18n/translations";
 
 const eqCategories = [
   {
@@ -35,6 +37,8 @@ const eqCategories = [
 ];
 
 const Equipment = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
   return (
     <section
       id="equipement"
@@ -66,10 +70,10 @@ const Equipment = () => {
             transition={{ duration: 0.5 }}
             className="text-mft-orange uppercase tracking-widest text-xs font-bold mb-4 inline-block"
           >
-            ÉQUIPEMENTS
+            {t.equipment.label}
           </motion.span>
           <h2 className="font-heading font-extrabold text-4xl lg:text-5xl text-white mb-5">
-            Équipements certifiés, fiables et{" "}
+            {t.equipment.titleBefore}{" "}
             <motion.span
               initial={{ backgroundSize: "0% 3px" }}
               whileInView={{ backgroundSize: "100% 3px" }}
@@ -83,7 +87,7 @@ const Equipment = () => {
                 backgroundPosition: "0 100%",
               }}
             >
-              performants
+              {t.equipment.titleHighlight}
             </motion.span>
           </h2>
         </motion.div>
@@ -131,10 +135,10 @@ const Equipment = () => {
                   </div>
                 </div>
                 <h4 className="font-heading font-bold text-lg text-white mb-3">
-                  {cat.name}
+                  {t.equipment.items[i].name}
                 </h4>
                 <p className="text-sm text-white/50 leading-relaxed">
-                  {cat.desc}
+                  {t.equipment.items[i].desc}
                 </p>
               </GlowCard>
             </motion.div>

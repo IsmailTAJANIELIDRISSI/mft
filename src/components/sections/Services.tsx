@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import EnergyLines from "../ui/EnergyLines";
+import { useLanguage } from "../../i18n/LanguageContext";
+import { translations } from "../../i18n/translations";
 
 const servicesSet = [
   {
@@ -55,6 +57,8 @@ const servicesSet = [
 
 const Services = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const { language } = useLanguage();
+  const t = translations[language];
 
   return (
     <section
@@ -89,10 +93,10 @@ const Services = () => {
               transition={{ duration: 0.5 }}
               className="text-mft-orange uppercase tracking-widest text-xs font-bold mb-4 inline-block"
             >
-              NOS SERVICES
+              {t.services.label}
             </motion.span>
             <h2 className="font-heading font-extrabold text-4xl lg:text-5xl text-white mb-6 leading-tight">
-              Solutions complètes pour
+              {t.services.titleBefore}
               <br />
               <span
                 className="text-transparent bg-clip-text"
@@ -102,12 +106,11 @@ const Services = () => {
                   WebkitBackgroundClip: "text",
                 }}
               >
-                l'industrie pétrolière
+                {t.services.titleHighlight}
               </span>
             </h2>
             <p className="text-lg text-white/50 max-w-2xl">
-              De l'installation à la maintenance, nous couvrons tous vos besoins
-              techniques avec rigueur et précision industrielle.
+              {t.services.description}
             </p>
           </motion.div>
         </div>
@@ -204,13 +207,13 @@ const Services = () => {
                     className="text-xs font-bold uppercase tracking-[0.18em] mb-2"
                     style={{ color: service.color }}
                   >
-                    {service.category}
+                    {t.services.items[i].category}
                   </p>
                   <h3
                     className="text-white font-heading font-bold text-xl leading-snug mb-3"
                     style={{ textShadow: "0 2px 16px rgba(0,0,0,0.6)" }}
                   >
-                    {service.title}
+                    {t.services.items[i].title}
                   </h3>
 
                   {/* Description + CTA slides in on hover */}
@@ -223,14 +226,14 @@ const Services = () => {
                     }}
                   >
                     <p className="text-white/65 text-sm leading-relaxed mb-4">
-                      {service.desc}
+                      {t.services.items[i].desc}
                     </p>
                     <a
                       href="#contact"
                       className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest"
                       style={{ color: service.color }}
                     >
-                      En savoir plus
+                      {t.services.more}
                       <svg
                         width="12"
                         height="12"

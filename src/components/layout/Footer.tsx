@@ -8,8 +8,12 @@ import {
   Printer,
 } from "lucide-react";
 import EnergyLines from "../ui/EnergyLines";
+import { useLanguage } from "../../i18n/LanguageContext";
+import { translations } from "../../i18n/translations";
 
 const Footer = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
   return (
     <footer className="bg-mft-dark text-white/80 pt-20 pb-10 relative overflow-hidden">
       <EnergyLines lineCount={15} baseHue={25} hueRange={80} opacity={0.1} />
@@ -26,9 +30,7 @@ const Footer = () => {
               </span>
             </div>
             <p className="text-sm leading-relaxed text-white/60">
-              Votre partenaire de confiance en équipements pétroliers. De
-              l'étude technique à la mise en service, nous vous accompagnons à
-              chaque étape.
+              {t.footer.brand}
             </p>
             <div className="flex gap-4">
               <a
@@ -61,39 +63,39 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <h4 className="font-heading font-semibold text-white mb-6 uppercase tracking-wider text-sm">
-              Services quick links
+              {t.footer.quickLinksTitle}
             </h4>
             <ul className="space-y-4">
               <li>
                 <a
-                  href="#"
+                  href="#services"
                   className="text-sm hover:text-mft-orange transition-colors"
                 >
-                  Services
+                  {t.footer.quickLinks[0]}
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#activites"
                   className="text-sm hover:text-mft-orange transition-colors"
                 >
-                  Formations
+                  {t.footer.quickLinks[1]}
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#produits"
                   className="text-sm hover:text-mft-orange transition-colors"
                 >
-                  Équipements
+                  {t.footer.quickLinks[2]}
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#about"
                   className="text-sm hover:text-mft-orange transition-colors"
                 >
-                  À Propos
+                  {t.footer.quickLinks[3]}
                 </a>
               </li>
               <li>
@@ -101,7 +103,7 @@ const Footer = () => {
                   href="#contact"
                   className="text-sm hover:text-mft-orange transition-colors"
                 >
-                  Contacter
+                  {t.footer.quickLinks[4]}
                 </a>
               </li>
             </ul>
@@ -110,7 +112,7 @@ const Footer = () => {
           {/* Contact */}
           <div>
             <h4 className="font-heading font-semibold text-white mb-6 uppercase tracking-wider text-sm">
-              Contact
+              {t.footer.contactTitle}
             </h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
@@ -144,7 +146,7 @@ const Footer = () => {
           {/* Legal */}
           <div>
             <h4 className="font-heading font-semibold text-white mb-6 uppercase tracking-wider text-sm">
-              Mentions légales / ICE
+              {t.footer.legalTitle}
             </h4>
             <ul className="space-y-4">
               <li>
@@ -163,9 +165,9 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/40 text-center md:text-left">
-            © 2025 Maghreb Fueling Technologies S.A.R.L. Tous droits réservés.
+            {t.footer.rights}
           </p>
-          <p className="text-xs text-white/40">Conçu pour l'industrie</p>
+          <p className="text-xs text-white/40">{t.footer.designed}</p>
         </div>
       </div>
     </footer>

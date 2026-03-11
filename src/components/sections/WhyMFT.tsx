@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Trophy, ShieldCheck, Truck, ArrowRight } from "lucide-react";
 import GlowCard from "../ui/GlowCard";
 import EnergyLines from "../ui/EnergyLines";
+import { useLanguage } from "../../i18n/LanguageContext";
+import { translations } from "../../i18n/translations";
 
 const reasons = [
   {
@@ -31,6 +33,8 @@ const reasons = [
 ];
 
 const WhyMFT = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
   return (
     <section className="py-24 lg:py-32 bg-transparent relative overflow-hidden">
       <EnergyLines lineCount={20} baseHue={25} hueRange={80} opacity={0.12} />
@@ -59,14 +63,13 @@ const WhyMFT = () => {
             transition={{ duration: 0.5 }}
             className="text-mft-orange uppercase tracking-widest text-xs font-bold mb-4 inline-block"
           >
-            POURQUOI MFT
+            {t.why.label}
           </motion.span>
           <h2 className="font-heading font-extrabold text-4xl lg:text-5xl text-white mb-4 leading-tight">
-            Pourquoi nous choisir ?
+            {t.why.title}
           </h2>
           <p className="text-white/50 text-lg">
-            La confiance de nos clients repose sur notre expertise, nos
-            équipements et notre réactivité.
+            {t.why.description}
           </p>
         </motion.div>
 
@@ -111,19 +114,19 @@ const WhyMFT = () => {
                       }}
                       className="font-heading font-extrabold text-3xl text-white/90 group-hover:text-mft-orange transition-colors duration-300"
                     >
-                      {reason.stat}
+                      {t.why.reasons[i].stat}
                     </motion.div>
                     <div className="text-[10px] text-white/40 uppercase tracking-widest font-bold">
-                      {reason.statLabel}
+                      {t.why.reasons[i].statLabel}
                     </div>
                   </div>
                 </div>
 
                 <h3 className="font-heading font-bold text-xl text-white mb-3 relative z-10">
-                  {reason.title}
+                  {t.why.reasons[i].title}
                 </h3>
                 <p className="text-white/50 text-sm leading-relaxed mb-8 flex-1 relative z-10">
-                  {reason.desc}
+                  {t.why.reasons[i].desc}
                 </p>
 
                 <motion.a
@@ -131,7 +134,7 @@ const WhyMFT = () => {
                   whileHover={{ x: 4 }}
                   className="inline-flex items-center gap-2 text-sm font-bold text-white/60 hover:text-mft-orange transition-colors relative z-10 mt-auto"
                 >
-                  En savoir plus
+                  {t.why.more}
                   <ArrowRight
                     size={14}
                     className="group-hover:translate-x-1 transition-transform"

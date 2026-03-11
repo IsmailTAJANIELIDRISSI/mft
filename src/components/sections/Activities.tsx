@@ -5,6 +5,8 @@ import LazyImage from "../ui/LazyImage";
 import ActivityModal from "../ui/ActivityModal";
 import EnergyLines from "../ui/EnergyLines";
 import { activities, type Activity } from "../../data/activities";
+import { useLanguage } from "../../i18n/LanguageContext";
+import { translations } from "../../i18n/translations";
 
 const CARDS_PER_PAGE = 3;
 const totalPages = Math.ceil(activities.length / CARDS_PER_PAGE);
@@ -15,6 +17,8 @@ const Activities = () => {
   const [selectedActivity, setSelectedActivity] = useState<Activity | null>(
     null,
   );
+  const { language } = useLanguage();
+  const t = translations[language];
 
   const currentCards = activities.slice(
     page * CARDS_PER_PAGE,
@@ -88,14 +92,13 @@ const Activities = () => {
                 transition={{ duration: 0.5 }}
                 className="text-mft-orange uppercase tracking-widest text-xs font-bold mb-4 inline-block"
               >
-                NOS ACTIVITÉS
+                {t.activities.label}
               </motion.span>
               <h2 className="font-heading font-bold text-4xl lg:text-5xl text-white mb-4 leading-tight">
-                Nos domaines d'expertise
+                {t.activities.title}
               </h2>
               <p className="text-white/50 text-lg">
-                Découvrez nos 8 pôles d'activité, nos réalisations et notre
-                savoir-faire terrain.
+                {t.activities.description}
               </p>
             </motion.div>
 
@@ -199,7 +202,7 @@ const Activities = () => {
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
 
                       <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-sm border border-white/10 text-white text-[11px] font-semibold">
-                        {activity.images.length} photos
+                        {activity.images.length} {t.activities.photos}
                       </div>
 
                       {/* Number overlay */}
@@ -228,7 +231,7 @@ const Activities = () => {
                         className={`cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.06] border border-white/10 text-white/80 text-sm font-medium hover:text-white transition-all duration-300 self-start ${i % 2 === 0 ? "hover:bg-mft-orange hover:border-mft-orange" : "hover:bg-mft-green hover:border-mft-green"}`}
                       >
                         <Eye size={15} />
-                        Voir les détails
+                        {t.activities.details}
                         <ChevronRight
                           size={13}
                           className="transition-transform group-hover:translate-x-0.5"
@@ -245,7 +248,7 @@ const Activities = () => {
           <div className="flex md:hidden justify-center mt-8">
             <div className="flex items-center gap-2 text-xs text-white/40">
               <ChevronLeft size={14} />
-              <span>Utilisez les flèches pour naviguer</span>
+              <span>{t.activities.useArrows}</span>
               <ChevronRight size={14} />
             </div>
           </div>

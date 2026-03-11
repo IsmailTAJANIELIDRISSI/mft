@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import EnergyLines from "../ui/EnergyLines";
+import { useLanguage } from "../../i18n/LanguageContext";
+import { translations } from "../../i18n/translations";
 
 // ─── Replace these three values with your EmailJS credentials ───
 const EMAILJS_SERVICE_ID = "service_lhqh94r";
@@ -56,6 +58,8 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const { language } = useLanguage();
+  const t = translations[language];
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -83,9 +87,7 @@ const Contact = () => {
         setFormData(emptyForm);
       })
       .catch(() => {
-        setError(
-          "Une erreur s'est produite. Veuillez réessayer ou nous contacter par téléphone.",
-        );
+        setError(t.contact.error);
       })
       .finally(() => setIsSubmitting(false));
   };
@@ -115,10 +117,10 @@ const Contact = () => {
               transition={{ duration: 0.5 }}
               className="text-mft-orange uppercase tracking-widest text-xs font-bold mb-4 inline-block"
             >
-              CONTACT
+              {t.contact.label}
             </motion.span>
             <h2 className="font-heading font-extrabold text-4xl lg:text-5xl text-white mb-6 leading-tight">
-              Parlons de votre{" "}
+              {t.contact.titleBefore}{" "}
               <motion.span
                 initial={{ backgroundSize: "0% 3px" }}
                 whileInView={{ backgroundSize: "100% 3px" }}
@@ -133,12 +135,11 @@ const Contact = () => {
                   backgroundPosition: "0 100%",
                 }}
               >
-                prochain projet
+                {t.contact.titleHighlight}
               </motion.span>
             </h2>
             <p className="text-white/60 text-lg mb-12 max-w-lg leading-relaxed">
-              Nos experts sont à votre disposition pour analyser vos besoins et
-              vous proposer les solutions techniques les plus adaptées.
+              {t.contact.description}
             </p>
 
             <ul className="space-y-6">
@@ -162,7 +163,7 @@ const Contact = () => {
                   </motion.div>
                   <div>
                     <h4 className="font-heading font-bold text-white text-sm mb-1">
-                      {item.title}
+                      {t.contact.infoTitles[i]}
                     </h4>
                     {item.lines.map((line) => (
                       <p key={line} className="text-white/50 text-sm">
@@ -197,7 +198,7 @@ const Contact = () => {
               />
 
               <h3 className="font-heading font-bold text-xl text-mft-dark mb-8">
-                Envoyez-nous un message
+                {t.contact.formTitle}
               </h3>
 
               <AnimatePresence mode="wait">
@@ -224,13 +225,10 @@ const Contact = () => {
                       <CheckCircle2 size={40} className="text-mft-orange" />
                     </motion.div>
                     <h4 className="font-heading font-bold text-2xl text-mft-dark mb-2">
-                      Demande envoyée !
+                      {t.contact.successTitle}
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed mb-8 max-w-xs">
-                      Merci pour votre message. Notre équipe technique vous
-                      répondra dans les{" "}
-                      <span className="font-semibold text-mft-orange">24h</span>
-                      .
+                      {t.contact.successText}
                     </p>
                     <motion.button
                       type="button"
@@ -239,7 +237,7 @@ const Contact = () => {
                       whileTap={{ scale: 0.97 }}
                       className="px-6 py-3 rounded-xl border-2 border-mft-orange text-mft-orange font-bold text-sm hover:bg-mft-orange hover:text-white transition-all duration-300"
                     >
-                      Nouvelle demande
+                      {t.contact.newRequest}
                     </motion.button>
                   </motion.div>
                 ) : (
@@ -260,7 +258,7 @@ const Contact = () => {
                             htmlFor="name"
                             className="block text-xs font-semibold text-mft-grey-dark mb-2 uppercase tracking-wider"
                           >
-                            Nom complet *
+                            {t.contact.fields.name}
                           </label>
                           <input
                             type="text"
@@ -270,7 +268,7 @@ const Contact = () => {
                             value={formData.name}
                             onChange={handleChange}
                             className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-mft-orange focus:ring-2 focus:ring-mft-orange/20 transition-all outline-none text-sm"
-                            placeholder="Jean Dupont"
+                            placeholder={t.contact.placeholders.name}
                           />
                         </div>
                         <div>
@@ -278,7 +276,7 @@ const Contact = () => {
                             htmlFor="company"
                             className="block text-xs font-semibold text-mft-grey-dark mb-2 uppercase tracking-wider"
                           >
-                            Société
+                            {t.contact.fields.company}
                           </label>
                           <input
                             type="text"
@@ -287,7 +285,7 @@ const Contact = () => {
                             value={formData.company}
                             onChange={handleChange}
                             className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-mft-orange focus:ring-2 focus:ring-mft-orange/20 transition-all outline-none text-sm"
-                            placeholder="Nom de l'entreprise"
+                            placeholder={t.contact.placeholders.company}
                           />
                         </div>
                       </div>
@@ -298,7 +296,7 @@ const Contact = () => {
                             htmlFor="email"
                             className="block text-xs font-semibold text-mft-grey-dark mb-2 uppercase tracking-wider"
                           >
-                            Email *
+                            {t.contact.fields.email}
                           </label>
                           <input
                             type="email"
@@ -308,7 +306,7 @@ const Contact = () => {
                             value={formData.email}
                             onChange={handleChange}
                             className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-mft-orange focus:ring-2 focus:ring-mft-orange/20 transition-all outline-none text-sm"
-                            placeholder="jean@email.com"
+                            placeholder={t.contact.placeholders.email}
                           />
                         </div>
                         <div>
@@ -316,7 +314,7 @@ const Contact = () => {
                             htmlFor="phone"
                             className="block text-xs font-semibold text-mft-grey-dark mb-2 uppercase tracking-wider"
                           >
-                            Téléphone *
+                            {t.contact.fields.phone}
                           </label>
                           <input
                             type="tel"
@@ -326,7 +324,7 @@ const Contact = () => {
                             value={formData.phone}
                             onChange={handleChange}
                             className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-mft-orange focus:ring-2 focus:ring-mft-orange/20 transition-all outline-none text-sm"
-                            placeholder="+212 6 XX XX XX XX"
+                            placeholder={t.contact.placeholders.phone}
                           />
                         </div>
                       </div>
@@ -336,7 +334,7 @@ const Contact = () => {
                           htmlFor="service"
                           className="block text-xs font-semibold text-mft-grey-dark mb-2 uppercase tracking-wider"
                         >
-                          Type de service
+                          {t.contact.fields.service}
                         </label>
                         <select
                           id="service"
@@ -351,17 +349,17 @@ const Contact = () => {
                             backgroundSize: "1em",
                           }}
                         >
-                          <option value="">Sélectionnez un service</option>
+                          <option value="">{t.contact.options.empty}</option>
                           <option value="installation">
-                            Installation & Mise en service
+                            {t.contact.options.installation}
                           </option>
                           <option value="maintenance">
-                            Maintenance & Dépannage
+                            {t.contact.options.maintenance}
                           </option>
-                          <option value="etudes">Études Techniques</option>
-                          <option value="formation">Formation</option>
-                          <option value="equipement">Achat d'Équipement</option>
-                          <option value="autre">Autre demande</option>
+                          <option value="etudes">{t.contact.options.etudes}</option>
+                          <option value="formation">{t.contact.options.formation}</option>
+                          <option value="equipement">{t.contact.options.equipement}</option>
+                          <option value="autre">{t.contact.options.autre}</option>
                         </select>
                       </div>
 
@@ -370,7 +368,7 @@ const Contact = () => {
                           htmlFor="message"
                           className="block text-xs font-semibold text-mft-grey-dark mb-2 uppercase tracking-wider"
                         >
-                          Message *
+                          {t.contact.fields.message}
                         </label>
                         <textarea
                           id="message"
@@ -380,7 +378,7 @@ const Contact = () => {
                           value={formData.message}
                           onChange={handleChange}
                           className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-mft-orange focus:ring-2 focus:ring-mft-orange/20 transition-all outline-none resize-y text-sm"
-                          placeholder="Comment pouvons-nous vous aider ?"
+                          placeholder={t.contact.placeholders.message}
                         />
                       </div>
 
@@ -409,11 +407,11 @@ const Contact = () => {
                           {isSubmitting ? (
                             <>
                               <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                              Envoi en cours…
+                              {t.contact.sending}
                             </>
                           ) : (
                             <>
-                              Envoyer la demande
+                              {t.contact.submit}
                               <Send size={18} />
                             </>
                           )}

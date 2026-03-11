@@ -1,10 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "../../i18n/LanguageContext";
+import { languages, translations } from "../../i18n/translations";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
+  const langDropdownRef = useRef<HTMLDivElement>(null);
+  const { language, setLanguage, isRTL } = useLanguage();
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (langDropdownRef.current && !langDropdownRef.current.contains(e.target as Node)) {
+        setLangDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+  const t = translations[language];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,14 +41,7 @@ const Navbar = () => {
     };
   }, [mobileMenuOpen]);
 
-  const navLinks = [
-    { name: "Services", href: "#services" },
-    { name: "Activités", href: "#activites" },
-    { name: "Réalisations", href: "#realisations" },
-    { name: "Équipements", href: "#equipement" },
-    { name: "À Propos", href: "#about" },
-    { name: "Contact", href: "#contact" },
-  ];
+  const navLinks = t.nav.links;
 
   return (
     <>
@@ -77,14 +86,57 @@ const Navbar = () => {
               ))}
             </div>
 
-            <div className="hidden lg:flex items-center">
+            <div className="hidden lg:flex items-center gap-3">
+              <div ref={langDropdownRef} className="relative">
+                <button
+                  onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                  className={`flex items-center gap-2 px-3 py-2 rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] transition-all text-sm font-bold ${isRTL ? "flex-row-reverse" : ""}`}
+                >
+                  <span className="text-white">{languages.find((l) => l.code === language)?.name}</span>
+                  <ChevronDown
+                    size={12}
+                    className={`text-white/70 transition-transform ${langDropdownOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+                <AnimatePresence>
+                  {langDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -6, scale: 0.96 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -6, scale: 0.96 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute top-full mt-1 right-0 left-0 min-w-[140px] rounded-xl border border-white/10 bg-mft-dark/95 backdrop-blur-xl shadow-xl overflow-hidden z-50"
+                    >
+                      {languages.map((option) => (
+                        <button
+                          key={option.code}
+                          onClick={() => {
+                            setLanguage(option.code);
+                            setLangDropdownOpen(false);
+                          }}
+                          className={`w-full flex items-center px-3 py-2.5 text-left text-sm font-bold transition-colors ${
+                            language === option.code
+                              ? "bg-white/15 text-white"
+                              : "text-white/70 hover:bg-white/10 hover:text-white"
+                          } ${isRTL ? "flex-row-reverse text-right justify-end" : ""}`}
+                        >
+                          {option.name}
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
               <a
                 href="#contact"
                 className="group relative px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-mft-orange to-mft-green hover:from-mft-orange-light hover:to-mft-green transition-all duration-300 shadow-lg shadow-mft-orange/20 overflow-hidden flex items-center gap-2"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  Demander un devis
-                  <ChevronDown size={14} className="rotate-[-90deg] group-hover:translate-x-0.5 transition-transform" />
+                  {t.nav.quote}
+                  <ChevronDown
+                    size={14}
+                    className={`${isRTL ? "rotate-[90deg] group-hover:-translate-x-0.5" : "rotate-[-90deg] group-hover:translate-x-0.5"} transition-transform`}
+                  />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
               </a>
@@ -111,6 +163,27 @@ const Navbar = () => {
           >
             <div className="container mx-auto px-6 pt-28 pb-12 min-h-screen flex flex-col">
               <nav className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
+                <div className="mb-8">
+                  <label className="block text-white/50 text-xs font-bold uppercase tracking-wider mb-2 px-2">
+                    {t.nav.language}
+                  </label>
+                  <div
+                    className={`flex items-center gap-2 px-4 py-3 rounded-2xl border border-white/10 bg-white/[0.03] ${isRTL ? "flex-row-reverse" : ""}`}
+                  >
+                    <select
+                      value={language}
+                      onChange={(e) => setLanguage(e.target.value as "fr" | "en" | "ar")}
+                      className="flex-1 bg-transparent border-none text-white text-sm font-bold appearance-none cursor-pointer focus:outline-none min-w-0"
+                    >
+                      {languages.map((option) => (
+                        <option key={option.code} value={option.code} className="bg-mft-dark text-white">
+                          {option.name}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown size={18} className={`text-white/50 ${isRTL ? "rotate-90" : "rotate-[-90deg]"}`} />
+                  </div>
+                </div>
                 <ul className="space-y-4">
                   {navLinks.map((link, i) => (
                     <motion.li
@@ -127,7 +200,7 @@ const Navbar = () => {
                         {link.name}
                         <ChevronDown
                           size={18}
-                          className="rotate-[-90deg] text-mft-orange opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-300"
+                          className={`${isRTL ? "rotate-[90deg] translate-x-4 group-hover:translate-x-0" : "rotate-[-90deg] -translate-x-4 group-hover:translate-x-0"} text-mft-orange opacity-0 group-hover:opacity-100 transition-all duration-300`}
                         />
                       </a>
                     </motion.li>
@@ -145,8 +218,8 @@ const Navbar = () => {
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex justify-center items-center gap-2 w-full py-4 rounded-2xl bg-mft-orange text-white font-bold tracking-wider uppercase text-sm hover:bg-mft-orange-light transition-colors shadow-lg shadow-mft-orange/20"
                   >
-                    Demander un devis
-                    <ChevronDown size={16} className="rotate-[-90deg]" />
+                    {t.nav.quote}
+                    <ChevronDown size={16} className={isRTL ? "rotate-[90deg]" : "rotate-[-90deg]"} />
                   </a>
                 </motion.div>
               </nav>

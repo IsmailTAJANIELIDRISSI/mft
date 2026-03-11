@@ -95,6 +95,22 @@
     @apply font-sans bg-mft-bg text-mft-grey-dark antialiased;
   }
 
+  input,
+  textarea,
+  select {
+    direction: inherit;
+  }
+
+  button:not(:disabled),
+  select,
+  a {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
   h1,
   h2,
   h3,
@@ -102,5 +118,13 @@
   h5,
   h6 {
     @apply font-heading font-bold;
+  }
+}
+
+@layer utilities {
+  html[dir="rtl"] input,
+  html[dir="rtl"] textarea,
+  html[dir="rtl"] select {
+    text-align: right;
   }
 }
