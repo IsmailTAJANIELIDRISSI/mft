@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import type { Activity } from "../../data/activities";
 import LazyImage from "./LazyImage";
+import { useLanguage } from "../../i18n/LanguageContext";
+import { translations } from "../../i18n/translations";
 
 interface ActivityModalProps {
   activity: Activity | null;
@@ -13,6 +15,8 @@ interface ActivityModalProps {
 
 const ActivityModal = ({ activity, onClose, onPrev, onNext }: ActivityModalProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
+  const { language } = useLanguage();
+  const t = translations[language];
 
   useEffect(() => {
     if (activity) {
@@ -69,7 +73,7 @@ const ActivityModal = ({ activity, onClose, onPrev, onNext }: ActivityModalProps
 
               <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
                 <p className="text-xs uppercase tracking-widest text-mft-orange font-bold mb-2">
-                  Activité #{activity.id}
+                  {t.activities.activity} #{activity.id}
                 </p>
                 <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl text-white leading-snug">
                   {activity.title}
@@ -138,7 +142,7 @@ const ActivityModal = ({ activity, onClose, onPrev, onNext }: ActivityModalProps
 
                 <div className="pt-4 border-t border-gray-100">
                   <h3 className="font-heading text-lg text-mft-dark mb-4">
-                    Galerie ({activity.images.length} photos)
+                    {t.activities.gallery} ({activity.images.length} {t.activities.photos})
                   </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                     {activity.images.map((img, i) => (

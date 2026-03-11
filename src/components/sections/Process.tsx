@@ -3,6 +3,8 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { Phone, Search, HardHat, HeartHandshake } from "lucide-react";
 import GlowCard from "../ui/GlowCard";
 import EnergyLines from "../ui/EnergyLines";
+import { useLanguage } from "../../i18n/LanguageContext";
+import { translations } from "../../i18n/translations";
 
 const steps = [
   {
@@ -47,6 +49,8 @@ const Process = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeStep, setActiveStep] = useState<number | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const { language } = useLanguage();
+  const t = translations[language];
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -145,17 +149,16 @@ const Process = () => {
             transition={{ duration: 0.5 }}
             className="text-mft-orange uppercase tracking-widest text-xs font-bold mb-4 inline-block"
           >
-            PROCESSUS
+            {t.process.label}
           </motion.span>
           <h2 className="font-heading font-extrabold text-4xl lg:text-5xl text-white mb-5">
             <span className="relative inline-block">
               <span className="absolute -inset-2 rounded-xl bg-mft-orange/15 blur-md" />
-              <span className="relative">Notre méthodologie</span>
+              <span className="relative">{t.process.title}</span>
             </span>
           </h2>
           <p className="text-white/50 text-lg">
-            De la conception à la maintenance, une approche éprouvée en 4
-            étapes.
+            {t.process.description}
           </p>
         </motion.div>
 
@@ -324,10 +327,10 @@ const Process = () => {
                         </div>
 
                         <h3 className="font-heading font-bold text-2xl text-white mb-3">
-                          {step.title}
+                          {t.process.steps[i].title}
                         </h3>
                         <p className="text-white/50 text-[15px] leading-relaxed">
-                          {step.desc}
+                          {t.process.steps[i].desc}
                         </p>
 
                         {/* Expandable detail on hover/click */}
@@ -341,7 +344,7 @@ const Process = () => {
                           className="overflow-hidden"
                         >
                           <p className="text-white/40 text-sm leading-relaxed mt-3 pt-3 border-t border-white/[0.06]">
-                            {step.detail}
+                            {t.process.steps[i].detail}
                           </p>
                         </motion.div>
                       </motion.div>

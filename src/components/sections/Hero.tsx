@@ -2,10 +2,14 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import heroBackground from "../../assets/image/image.png";
 import heroMobileBackground from "../../assets/image/hero-background-mobile.png";
+import { useLanguage } from "../../i18n/LanguageContext";
+import { translations } from "../../i18n/translations";
 
 const Hero = () => {
   const [bgLoaded, setBgLoaded] = useState(false);
   const handleBgLoad = () => setBgLoaded(true);
+  const { language, isRTL } = useLanguage();
+  const t = translations[language];
 
   const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -49,7 +53,7 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10 flex flex-col h-full justify-between">
-        <div className="max-w-4xl mt-8 md:mt-20">
+        <div className={`max-w-4xl mt-8 md:mt-20 ${isRTL ? "text-right mr-auto" : ""}`}>
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -62,7 +66,7 @@ const Hero = () => {
               transition={{ repeat: Infinity, duration: 2 }}
             />
             <span className="text-mft-orange uppercase tracking-widest text-xs font-bold leading-none">
-              Solutions Industrielles Pétrolières
+              {t.hero.badge}
             </span>
           </motion.div>
 
@@ -73,14 +77,14 @@ const Hero = () => {
               transition={{ duration: 1, delay: 0.2, ease }}
               className="font-heading font-extrabold text-4xl md:text-6xl lg:text-7xl text-white leading-[1.05] tracking-tight"
             >
-              VOTRE PARTENAIRE
+              {t.hero.title[0]}
               <br />
-              DE CONFIANCE EN
+              {t.hero.title[1]}
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-mft-orange to-mft-orange-light">
-                ÉQUIPEMENTS
+                {t.hero.title[2]}
               </span>{" "}
-              PÉTROLIERS.
+              {t.hero.suffix}
             </motion.h1>
           </div>
 
@@ -90,9 +94,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.8, ease }}
             className="text-lg md:text-xl text-white/70 max-w-2xl mb-12 font-light leading-relaxed"
           >
-            De l'étude technique à la mise en service, MFT vous accompagne à
-            chaque étape de vos projets de stations-service et d'industrie
-            pétrolière.
+            {t.hero.description}
           </motion.p>
 
           <motion.div
@@ -105,14 +107,14 @@ const Hero = () => {
               href="#services"
               className="group relative px-8 py-4 rounded-xl bg-mft-orange text-white font-bold text-center transition-all hover:shadow-[0_20px_40px_-12px_rgba(232,119,34,0.4)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden"
             >
-              <span className="relative z-10">Découvrir nos services</span>
+              <span className="relative z-10">{t.hero.primary}</span>
               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
             </a>
             <a
               href="#contact"
               className="px-8 py-4 rounded-xl border border-white/20 text-white font-bold text-center transition-all hover:bg-white/10 hover:border-white/40 hover:-translate-y-0.5"
             >
-              Nous contacter
+              {t.hero.secondary}
             </a>
           </motion.div>
         </div>
@@ -126,16 +128,14 @@ const Hero = () => {
           <div className="bg-white/[0.06] backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-white/10">
               {[
-                { value: "15+", label: "Années d'expérience" },
-                { value: "200+", label: "Installations réalisées" },
-                { value: "3", label: "Marques certifiées" },
+                ...t.hero.stats,
               ].map((stat, i) => (
                 <motion.div
                   key={stat.label}
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 1.5 + i * 0.15, duration: 0.5, ease }}
-                  className="flex flex-col items-center md:items-start text-center md:text-left px-4 pt-4 md:pt-0 first:pt-0"
+                  className={`flex flex-col items-center ${isRTL ? "md:items-end md:text-right" : "md:items-start md:text-left"} text-center px-4 pt-4 md:pt-0 first:pt-0`}
                 >
                   <span className="text-4xl lg:text-5xl font-heading font-extrabold text-white mb-2">
                     {stat.value}

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import AppLoader from "./components/ui/AppLoader";
+import { LanguageProvider } from "./i18n/LanguageContext";
 import HomePage from "./pages/HomePage";
 
 function App() {
@@ -12,10 +13,10 @@ function App() {
   }, []);
 
   return (
-    <>
+    <LanguageProvider>
       <AppLoader />
       <HomePage />
-    </>
+    </LanguageProvider>
   );
 }
 

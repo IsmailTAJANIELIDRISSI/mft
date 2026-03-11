@@ -19,6 +19,8 @@ import {
   CircuitBoard,
 } from "lucide-react";
 import EnergyLines from "../ui/EnergyLines";
+import { useLanguage } from "../../i18n/LanguageContext";
+import { translations } from "../../i18n/translations";
 
 const tabs = [
   {
@@ -198,11 +200,24 @@ const GalleryImage = ({
 };
 
 const Realisations = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
   const [activeTab, setActiveTab] = useState(0);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [galleryTab, setGalleryTab] = useState<string>("b2b");
-  const active = tabs[activeTab];
+  const localizedTabs = tabs.map((tab) => {
+    const localizedTab = t.realisations.tabs[tab.id as "b2b" | "b2c" | "depots"];
+    return {
+      ...tab,
+      ...localizedTab,
+      bullets: tab.bullets.map((bullet, index) => ({
+        ...bullet,
+        text: localizedTab.bullets[index],
+      })),
+    };
+  });
+  const active = localizedTabs[activeTab];
   const currentGalleryImages = galleryImagesByTab[galleryTab] ?? [];
 
   const openGallery = () => {
@@ -261,7 +276,7 @@ const Realisations = () => {
           className="max-w-4xl mx-auto mb-6"
         >
           <h2 className="font-heading font-extrabold text-3xl lg:text-4xl text-white leading-tight text-center">
-            Des projets concrets, des{" "}
+            {t.realisations.headingBefore}{" "}
             <motion.span
               initial={{ backgroundSize: "0% 3px" }}
               whileInView={{ backgroundSize: "100% 3px" }}
@@ -275,7 +290,7 @@ const Realisations = () => {
                 backgroundPosition: "0 100%",
               }}
             >
-              résultats prouvés
+              {t.realisations.headingHighlight}
             </motion.span>
           </h2>
         </motion.div>
@@ -289,7 +304,7 @@ const Realisations = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="grid grid-cols-3 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-2xl overflow-hidden shadow-lg p-1.5 gap-1.5"
           >
-            {tabs.map((tab, i) => (
+            {localizedTabs.map((tab, i) => (
               <motion.button
                 key={tab.id}
                 onClick={() => setActiveTab(i)}
@@ -383,7 +398,7 @@ const Realisations = () => {
                   onClick={openGallery}
                   className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider text-white border border-white/25 bg-white/[0.03] backdrop-blur-sm hover:border-mft-orange/60 hover:text-mft-orange hover:bg-mft-orange/10 transition-all duration-300"
                 >
-                  Voir les images
+                    {t.realisations.seeImages}
                   <ChevronRight size={14} />
                 </button>
               </div>
@@ -422,7 +437,7 @@ const Realisations = () => {
               <div className="relative rounded-3xl overflow-hidden border border-white/15 bg-black/20 backdrop-blur-sm shadow-[0_30px_70px_rgba(0,0,0,0.55)]">
                 <GalleryImage
                   src={currentGalleryImages[galleryIndex]}
-                  alt={`Réalisation ${tabs.find((t) => t.id === galleryTab)?.label ?? galleryTab} ${galleryIndex + 1}`}
+                  alt={`Réalisation ${localizedTabs.find((tab) => tab.id === galleryTab)?.label ?? galleryTab} ${galleryIndex + 1}`}
                   className="w-full h-[65vh] object-cover"
                 />
 

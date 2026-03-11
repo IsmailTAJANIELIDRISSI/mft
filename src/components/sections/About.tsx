@@ -4,6 +4,8 @@ import aboutBackground from "../../assets/image/about-background.png";
 import LazyImage from "../ui/LazyImage";
 import EnergyLines from "../ui/EnergyLines";
 import { useRef } from "react";
+import { useLanguage } from "../../i18n/LanguageContext";
+import { translations } from "../../i18n/translations";
 
 const features = [
   {
@@ -28,6 +30,8 @@ const features = [
 
 const About = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const { language, isRTL } = useLanguage();
+  const t = translations[language];
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
@@ -60,34 +64,26 @@ const About = () => {
             className="order-2 lg:order-1"
           >
             <span className="text-mft-orange uppercase tracking-widest text-xs font-bold mb-6 inline-block">
-              À PROPOS
+              {t.about.label}
             </span>
 
             <h2 className="font-heading font-extrabold text-4xl lg:text-5xl tracking-tight text-white mb-6 leading-tight">
-              Maghreb Fueling{" "}
+              {t.about.titlePrefix}{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-mft-orange to-mft-orange-light">
-                Technologies
+                {t.about.titleHighlight}
               </span>
             </h2>
 
             <div className="space-y-4 text-white/60 mb-10 text-[15px] leading-relaxed">
-              <p>
-                Maghreb Fueling Technologie est une entreprise spécialisée dans
-                les solutions techniques et les services pour les installations
-                carburant, les infrastructures industrielles et énergétiques.
-              </p>
-              <p>
-                Grâce à une équipe d'experts techniques et à une expérience
-                solide dans le domaine, nous proposons des solutions fiables,
-                innovantes et adaptées aux besoins spécifiques de chaque site,
-                en respectant les normes industrielles et environnementales.
-              </p>
+              {t.about.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </div>
 
             <div className="space-y-4">
               {features.map((feat, i) => (
                 <motion.div
-                  key={feat.title}
+                  key={t.about.features[i].title}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -101,10 +97,10 @@ const About = () => {
                   </div>
                   <div>
                     <h4 className="font-heading font-bold text-base text-white mb-1">
-                      {feat.title}
+                      {t.about.features[i].title}
                     </h4>
                     <p className="text-sm text-white/50 leading-relaxed">
-                      {feat.desc}
+                      {t.about.features[i].desc}
                     </p>
                   </div>
                 </motion.div>
@@ -127,7 +123,7 @@ const About = () => {
             >
               <LazyImage
                 src={aboutBackground}
-                alt="MFT en action"
+                alt={t.about.imageAlt}
                 wrapperClassName="w-full h-[560px]"
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
@@ -145,7 +141,7 @@ const About = () => {
                 100%
               </div>
               <div className="text-[10px] font-bold text-mft-orange uppercase tracking-widest">
-                Solutions sur mesure
+                {t.about.badge}
               </div>
             </motion.div>
           </motion.div>
