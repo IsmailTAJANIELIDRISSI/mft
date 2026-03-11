@@ -32,7 +32,7 @@ const contactInfo = [
   {
     icon: <Mail size={22} />,
     title: "Email",
-    lines: ["mft@mft.ma"],
+    lines: ["CRM@mft.ma"],
   },
   {
     icon: <Globe size={22} />,
