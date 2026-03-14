@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, X, Package, Download } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, Package, Download, ExternalLink } from "lucide-react";
 import EnergyLines from "../ui/EnergyLines";
 import { useLanguage } from "../../i18n/LanguageContext";
 import { translations } from "../../i18n/translations";
@@ -32,6 +32,7 @@ const produitsData: Array<{
   title: string;
   content: string;
   pdfUrl?: string;
+  fournisseurLinks?: Array<{ label: string; url: string }>;
 }> = [
   {
     slug: "distributeurs-carburant",
@@ -51,6 +52,9 @@ Modèles proposés :
 • SK52 / SK56 / SK65 – Distributeurs haute gamme multi-buses pour stations à fort trafic.
 
 Ces équipements sont conçus pour fonctionner avec différents carburants tels que l'essence, le diesel et peuvent être configurés avec des options avancées (carte IC, impression de tickets, affichage LED ou connexion au système de gestion FMS).`,
+    fournisseurLinks: [
+      { label: "SANKI - Volucompteur", url: "https://www.sankichina.fr/" },
+    ],
   },
   {
     slug: "tuyauterie-kps-opw",
@@ -68,6 +72,9 @@ Gamme de produits – KPS Petrol Pipe System™ :
 • Limiteurs de remplissage et systèmes de détection de fuites
 
 Les tuyaux KPS sont fabriqués selon un procédé exclusif avec une barrière anti-perméation hautement performante. Le système est conforme à la norme EN 14125 et UL 971.`,
+    fournisseurLinks: [
+      { label: "KPS Piping", url: "https://kpspiping.fr/" },
+    ],
   },
   {
     slug: "raccordements-ridart",
@@ -85,6 +92,9 @@ Caractéristiques techniques :
 • Raccords conformes aux normes européennes (ATEX, EN ISO)
 • Compatibles avec une large gamme de carburants
 • Solutions sur mesure selon les besoins du projet`,
+    fournisseurLinks: [
+      { label: "Ridart", url: "https://www.ridart.it/index" },
+    ],
   },
   {
     slug: "flexible-pistolet",
@@ -102,6 +112,10 @@ Caractéristiques techniques :
 • Systèmes anti-goutte et anti-fuite
 • Conception robuste pour usage intensif
 • Compatibilité avec différents types de carburants`,
+    fournisseurLinks: [
+      { label: "ALFAGOMMA - Flexible", url: "https://www.alfagomma.com/fr/" },
+      { label: "OPW - Pistolet", url: "https://www.opwglobal.com/" },
+    ],
   },
   {
     slug: "telejaugeage-atg",
@@ -228,6 +242,9 @@ Produits :
 • Compresseur à borne air – Solution pour l'air comprimé
 
 Avantages : Solutions fiables et durables, meilleure précision, réduction des temps d'arrêt, conception ergonomique.`,
+    fournisseurLinks: [
+      { label: "MECLUBE", url: "https://meclube.com/It" },
+    ],
   },
   {
     slug: "pompes-immergees-barbero",
@@ -243,6 +260,9 @@ Caractéristiques techniques principales :
 • Flexibilité d'installation – citernes aériennes ou enterrées
 
 Idéales pour les stations-service, dépôts de stockage et installations industrielles.`,
+    fournisseurLinks: [
+      { label: "E. Barbero - Pompe immergée", url: "https://www.ebarbero.com/bga-2/?lang=en" },
+    ],
   },
 ];
 
@@ -533,18 +553,41 @@ const Produits = () => {
                   </div>
                 )}
 
-                {modalProduit.pdfUrl && (
-                  <a
-                    href={modalProduit.pdfUrl}
-                    download="dossier-technique-chambres-composite.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-mft-orange/20 hover:bg-mft-orange/30 text-mft-orange font-semibold text-sm transition-colors border border-mft-orange/40 cursor-pointer"
-                  >
-                    <Download className="w-4 h-4" />
-                    {t.produits.downloadDossier}
-                  </a>
-                )}
+                <div className="flex flex-wrap gap-3">
+                  {modalProduit.pdfUrl && (
+                    <a
+                      href={modalProduit.pdfUrl}
+                      download="dossier-technique-chambres-composite.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-mft-orange/20 hover:bg-mft-orange/30 text-mft-orange font-semibold text-sm transition-colors border border-mft-orange/40 cursor-pointer"
+                    >
+                      <Download className="w-4 h-4" />
+                      {t.produits.downloadDossier}
+                    </a>
+                  )}
+                  {modalProduit.fournisseurLinks && modalProduit.fournisseurLinks.length > 0 && (
+                    <div className="flex flex-col gap-2">
+                      <span className="text-xs font-bold uppercase tracking-wider text-white/50">
+                        {t.produits.fournisseur}
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {modalProduit.fournisseurLinks.map((link) => (
+                          <a
+                            key={link.url}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-white/80 hover:text-white font-medium text-sm transition-colors border border-white/10"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            {link.label}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
 
                 <div className="prose prose-invert prose-sm max-w-none">
                   <p className="text-white/80 whitespace-pre-line leading-relaxed">

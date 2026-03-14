@@ -75,7 +75,7 @@ const Hero = () => {
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               transition={{ duration: 1, delay: 0.2, ease }}
-              className="font-heading font-extrabold text-4xl md:text-6xl lg:text-7xl text-white leading-[1.05] tracking-tight"
+              className="font-heading font-extrabold text-3xl md:text-4xl lg:text-5xl text-white leading-[1.1] tracking-tight"
             >
               {t.hero.title[0]}
               <br />

@@ -1,48 +1,17 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { Phone, Search, HardHat, HeartHandshake } from "lucide-react";
+import { Award, Users, Shield, Scale, Zap } from "lucide-react";
 import GlowCard from "../ui/GlowCard";
 import EnergyLines from "../ui/EnergyLines";
 import { useLanguage } from "../../i18n/LanguageContext";
 import { translations } from "../../i18n/translations";
 
 const steps = [
-  {
-    num: 1,
-    icon: <Phone size={24} />,
-    title: "Prise de contact",
-    desc: "Définition des besoins initiaux et périmètre du projet.",
-    detail:
-      "Notre équipe d'experts analyse votre demande et identifie les solutions techniques les mieux adaptées à vos objectifs opérationnels.",
-    color: "orange" as const,
-  },
-  {
-    num: 2,
-    icon: <Search size={24} />,
-    title: "Étude technique",
-    desc: "Analyse approfondie et dimensionnement précis.",
-    detail:
-      "Études de faisabilité, plans techniques détaillés et recommandations d'équipements pour une mise en œuvre optimale.",
-    color: "green" as const,
-  },
-  {
-    num: 3,
-    icon: <HardHat size={24} />,
-    title: "Installation",
-    desc: "Pose professionnelle et mise en service sur site.",
-    detail:
-      "Nos techniciens certifiés assurent une installation conforme aux normes internationales avec un contrôle qualité rigoureux.",
-    color: "orange" as const,
-  },
-  {
-    num: 4,
-    icon: <HeartHandshake size={24} />,
-    title: "Suivi & Maintenance",
-    desc: "Assistance continue et contrat de service dédié.",
-    detail:
-      "Programme de maintenance préventive, interventions rapides et suivi personnalisé pour garantir la pérennité de vos installations.",
-    color: "green" as const,
-  },
+  { num: 1, icon: <Award size={24} />, color: "orange" as const },
+  { num: 2, icon: <Users size={24} />, color: "green" as const },
+  { num: 3, icon: <Shield size={24} />, color: "orange" as const },
+  { num: 4, icon: <Scale size={24} />, color: "green" as const },
+  { num: 5, icon: <Zap size={24} />, color: "orange" as const },
 ];
 
 const Process = () => {

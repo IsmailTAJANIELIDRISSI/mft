@@ -101,33 +101,39 @@ export const translations = {
       ],
     },
     process: {
-      label: "PROCESSUS",
-      title: "Notre méthodologie",
-      description: "De la conception à la maintenance, une approche éprouvée en 4 étapes.",
+      label: "NOS VALEURS",
+      title: "Nos Valeurs",
+      description: "Les principes qui guident notre engagement au quotidien.",
       steps: [
         {
-          title: "Prise de contact",
-          desc: "Définition des besoins initiaux et périmètre du projet.",
+          title: "01 – Excellence",
+          desc: "Nous nous engageons à fournir des services et des solutions de haute qualité en respectant les normes techniques et les exigences de nos clients.",
           detail:
-            "Notre équipe d'experts analyse votre demande et identifie les solutions techniques les mieux adaptées à vos objectifs opérationnels.",
+            "Nous nous engageons à fournir des services et des solutions de haute qualité en respectant les normes techniques et les exigences de nos clients.",
         },
         {
-          title: "Étude technique",
-          desc: "Analyse approfondie et dimensionnement précis.",
+          title: "02 – Solidarité et engagement mutuel",
+          desc: "Nous croyons au travail d'équipe et à la collaboration. Notre succès repose sur l'engagement de chacun et le respect mutuel entre nos collaborateurs et partenaires.",
           detail:
-            "Études de faisabilité, plans techniques détaillés et recommandations d'équipements pour une mise en œuvre optimale.",
+            "Nous croyons au travail d'équipe et à la collaboration. Notre succès repose sur l'engagement de chacun et le respect mutuel entre nos collaborateurs et partenaires.",
         },
         {
-          title: "Installation",
-          desc: "Pose professionnelle et mise en service sur site.",
+          title: "03 – Intégrité",
+          desc: "Nous agissons avec transparence, honnêteté et responsabilité dans toutes nos relations professionnelles.",
           detail:
-            "Nos techniciens certifiés assurent une installation conforme aux normes internationales avec un contrôle qualité rigoureux.",
+            "Nous agissons avec transparence, honnêteté et responsabilité dans toutes nos relations professionnelles.",
         },
         {
-          title: "Suivi & Maintenance",
-          desc: "Assistance continue et contrat de service dédié.",
+          title: "04 – Indépendance",
+          desc: "Nous privilégions des décisions objectives et techniques afin d'offrir à nos clients les solutions les plus adaptées à leurs besoins.",
           detail:
-            "Programme de maintenance préventive, interventions rapides et suivi personnalisé pour garantir la pérennité de vos installations.",
+            "Nous privilégions des décisions objectives et techniques afin d'offrir à nos clients les solutions les plus adaptées à leurs besoins.",
+        },
+        {
+          title: "05 – Passion d'entreprendre",
+          desc: "Notre passion pour l'innovation et le développement nous pousse à améliorer continuellement nos services et à relever de nouveaux défis.",
+          detail:
+            "Notre passion pour l'innovation et le développement nous pousse à améliorer continuellement nos services et à relever de nouveaux défis.",
         },
       ],
     },
@@ -135,7 +141,7 @@ export const translations = {
       label: "NOS ACTIVITÉS",
       title: "Nos domaines d'expertise",
       description:
-        "Découvrez nos 8 pôles d'activité, nos réalisations et notre savoir-faire terrain.",
+        "Découvrez nos 6 pôles d'activité, nos réalisations et notre savoir-faire terrain.",
       details: "Voir les détails",
       useArrows: "Utilisez les flèches pour naviguer",
       photos: "photos",
@@ -150,10 +156,10 @@ export const translations = {
         "Image non disponible. Placez vos images dans le dossier indiqué avec les noms img-01.jpeg, img-02.jpeg, etc.",
       tabs: {
         b2b: {
-          label: "B2B",
+          label: "Station privée",
           sublabel: "Industriels",
           title:
-            "Réalisations B2B – Sites industriels, flottes & installations spécialisées",
+            "Réalisations Station privée – Sites industriels, flottes & installations spécialisées",
           intro:
             "Nous accompagnons les entreprises et industriels dans la réalisation de :",
           bullets: [
@@ -167,9 +173,9 @@ export const translations = {
             "Ces projets sont conçus pour garantir fiabilité, contrôle et continuité d'exploitation.",
         },
         b2c: {
-          label: "B2C",
+          label: "Station publique",
           sublabel: "Stations",
-          title: "Réalisations B2C – Stations-service & services au public",
+          title: "Réalisations Station publique – Stations-service & services au public",
           intro:
             "Nous réalisons des projets destinés aux stations-service ouvertes au public, en assurant :",
           bullets: [
@@ -207,6 +213,7 @@ export const translations = {
       voirDetails: "Voir les détails",
       fermer: "Fermer",
       downloadDossier: "Télécharger le dossier technique",
+      fournisseur: "Fournisseur",
     },
     equipment: {
       label: "ÉQUIPEMENTS",
@@ -311,6 +318,7 @@ export const translations = {
       quickLinksTitle: "Liens rapides",
       quickLinks: ["Services", "Activités", "Produits", "À Propos", "Contacter"],
       contactTitle: "Contact",
+      certificationTitle: "Certification",
       legalTitle: "Mentions légales / ICE",
       rights: "© 2025 Maghreb Fueling Technologies S.A.R.L. Tous droits réservés.",
       designed: "Conçu pour l'industrie",
@@ -410,33 +418,39 @@ export const translations = {
       ],
     },
     process: {
-      label: "PROCESS",
-      title: "Our methodology",
-      description: "From design to maintenance, a proven 4-step approach.",
+      label: "OUR VALUES",
+      title: "Our Values",
+      description: "The principles that guide our daily commitment.",
       steps: [
         {
-          title: "Initial Contact",
-          desc: "Definition of initial needs and project scope.",
+          title: "01 – Excellence",
+          desc: "We are committed to providing high-quality services and solutions that meet technical standards and our clients' requirements.",
           detail:
-            "Our experts analyze your request and identify the most suitable technical solutions for your operational goals.",
+            "We are committed to providing high-quality services and solutions that meet technical standards and our clients' requirements.",
         },
         {
-          title: "Technical Study",
-          desc: "In-depth analysis and accurate sizing.",
+          title: "02 – Solidarity and mutual commitment",
+          desc: "We believe in teamwork and collaboration. Our success relies on each person's commitment and mutual respect between our collaborators and partners.",
           detail:
-            "Feasibility studies, detailed technical plans, and equipment recommendations for optimal implementation.",
+            "We believe in teamwork and collaboration. Our success relies on each person's commitment and mutual respect between our collaborators and partners.",
         },
         {
-          title: "Installation",
-          desc: "Professional on-site installation and commissioning.",
+          title: "03 – Integrity",
+          desc: "We act with transparency, honesty and responsibility in all our professional relationships.",
           detail:
-            "Our certified technicians ensure compliant installation with rigorous quality control.",
+            "We act with transparency, honesty and responsibility in all our professional relationships.",
         },
         {
-          title: "Follow-up & Maintenance",
-          desc: "Ongoing support and dedicated service contract.",
+          title: "04 – Independence",
+          desc: "We favour objective and technical decisions to offer our clients the most suitable solutions for their needs.",
           detail:
-            "Preventive maintenance programs, rapid interventions, and personalized follow-up to ensure long-term performance.",
+            "We favour objective and technical decisions to offer our clients the most suitable solutions for their needs.",
+        },
+        {
+          title: "05 – Passion for entrepreneurship",
+          desc: "Our passion for innovation and development drives us to continuously improve our services and take on new challenges.",
+          detail:
+            "Our passion for innovation and development drives us to continuously improve our services and take on new challenges.",
         },
       ],
     },
@@ -444,7 +458,7 @@ export const translations = {
       label: "OUR ACTIVITIES",
       title: "Our areas of expertise",
       description:
-        "Discover our 8 business areas, our completed projects, and our field know-how.",
+        "Discover our 6 business areas, our completed projects, and our field know-how.",
       details: "See details",
       useArrows: "Use the arrows to navigate",
       photos: "photos",
@@ -459,9 +473,9 @@ export const translations = {
         "Image unavailable. Place your images in the indicated folder using names such as img-01.jpeg, img-02.jpeg, etc.",
       tabs: {
         b2b: {
-          label: "B2B",
+          label: "Private Station",
           sublabel: "Industrial",
-          title: "B2B Projects - Industrial sites, fleets & specialized installations",
+          title: "Private Station Projects - Industrial sites, fleets & specialized installations",
           intro: "We support companies and industrial clients in delivering:",
           bullets: [
             "Fuel equipment installation deployment",
@@ -474,9 +488,9 @@ export const translations = {
             "These projects are designed to guarantee reliability, control, and operational continuity.",
         },
         b2c: {
-          label: "B2C",
+          label: "Public Station",
           sublabel: "Stations",
-          title: "B2C Projects - Service stations & public services",
+          title: "Public Station Projects - Service stations & public services",
           intro:
             "We deliver projects for public service stations, ensuring:",
           bullets: [
@@ -514,6 +528,7 @@ export const translations = {
       voirDetails: "View details",
       fermer: "Close",
       downloadDossier: "Download technical brochure",
+      fournisseur: "Supplier",
     },
     equipment: {
       label: "EQUIPMENT",
@@ -618,6 +633,7 @@ export const translations = {
       quickLinksTitle: "Quick links",
       quickLinks: ["Services", "Activities", "Products", "About", "Contact"],
       contactTitle: "Contact",
+      certificationTitle: "Certification",
       legalTitle: "Legal notice / ICE",
       rights: "© 2025 Maghreb Fueling Technologies S.A.R.L. All rights reserved.",
       designed: "Designed for industry",
@@ -717,33 +733,39 @@ export const translations = {
       ],
     },
     process: {
-      label: "المنهجية",
-      title: "منهجيتنا",
-      description: "من التصميم إلى الصيانة، منهجية مجربة في 4 مراحل.",
+      label: "قيمنا",
+      title: "قيمنا",
+      description: "المبادئ التي توجه التزامنا اليومي.",
       steps: [
         {
-          title: "التواصل الأولي",
-          desc: "تحديد الاحتياجات الأولية ونطاق المشروع.",
+          title: "01 – التميز",
+          desc: "نتعهد بتقديم خدمات وحلول عالية الجودة مع احترام المعايير التقنية ومتطلبات عملائنا.",
           detail:
-            "يقوم خبراؤنا بتحليل طلبكم وتحديد الحلول التقنية الأنسب لأهدافكم التشغيلية.",
+            "نتعهد بتقديم خدمات وحلول عالية الجودة مع احترام المعايير التقنية ومتطلبات عملائنا.",
         },
         {
-          title: "الدراسة التقنية",
-          desc: "تحليل معمق وتحديد دقيق للمواصفات.",
+          title: "02 – التضامن والالتزام المتبادل",
+          desc: "نؤمن بعمل الفريق والتعاون. يقع نجاحنا على التزام كل واحد والاحترام المتبادل بين زملائنا وشركائنا.",
           detail:
-            "دراسات جدوى ومخططات تقنية مفصلة وتوصيات بالمعدات لضمان تنفيذ أمثل.",
+            "نؤمن بعمل الفريق والتعاون. يقع نجاحنا على التزام كل واحد والاحترام المتبادل بين زملائنا وشركائنا.",
         },
         {
-          title: "التركيب",
-          desc: "تركيب احترافي وتشغيل فعلي في الموقع.",
+          title: "03 – النزاهة",
+          desc: "نعمل بشفافية وأمانة ومسؤولية في جميع علاقاتنا المهنية.",
           detail:
-            "يضمن تقنيونا المعتمدون تركيباً مطابقاً للمعايير مع مراقبة جودة صارمة.",
+            "نعمل بشفافية وأمانة ومسؤولية في جميع علاقاتنا المهنية.",
         },
         {
-          title: "المتابعة والصيانة",
-          desc: "دعم مستمر وعقد خدمة مخصص.",
+          title: "04 – الاستقلالية",
+          desc: "نفضل قرارات موضوعية وتقنية لتقديم أفضل الحلول المناسبة لاحتياجات عملائنا.",
           detail:
-            "برامج صيانة وقائية وتدخلات سريعة ومتابعة شخصية لضمان استدامة الأداء.",
+            "نفضل قرارات موضوعية وتقنية لتقديم أفضل الحلول المناسبة لاحتياجات عملائنا.",
+        },
+        {
+          title: "05 – الشغف بالمشاريع",
+          desc: "شغفنا بالابتكار والتطوير يدفعنا لتحسين خدماتنا باستمرار ومواجهة تحديات جديدة.",
+          detail:
+            "شغفنا بالابتكار والتطوير يدفعنا لتحسين خدماتنا باستمرار ومواجهة تحديات جديدة.",
         },
       ],
     },
@@ -751,7 +773,7 @@ export const translations = {
       label: "أنشطتنا",
       title: "مجالات خبرتنا",
       description:
-        "اكتشفوا مجالات نشاطنا الثمانية وإنجازاتنا وخبرتنا الميدانية.",
+        "اكتشفوا مجالات نشاطنا الستة وإنجازاتنا وخبرتنا الميدانية.",
       details: "عرض التفاصيل",
       useArrows: "استخدم الأسهم للتنقل",
       photos: "صور",
@@ -766,9 +788,9 @@ export const translations = {
         "الصورة غير متوفرة. ضع صورك في المجلد المحدد بالأسماء img-01.jpeg و img-02.jpeg وغيرها.",
       tabs: {
         b2b: {
-          label: "B2B",
+          label: "محطة خاصة",
           sublabel: "صناعي",
-          title: "إنجازات B2B - مواقع صناعية وأساطيل وتركيبات متخصصة",
+          title: "إنجازات المحطة الخاصة - مواقع صناعية وأساطيل وتركيبات متخصصة",
           intro: "نواكب الشركات والقطاع الصناعي في إنجاز:",
           bullets: [
             "تركيب تجهيزات الوقود",
@@ -781,9 +803,9 @@ export const translations = {
             "تم تصميم هذه المشاريع لضمان الموثوقية والتحكم واستمرارية التشغيل.",
         },
         b2c: {
-          label: "B2C",
+          label: "محطة عمومية",
           sublabel: "محطات",
-          title: "إنجازات B2C - محطات الخدمة والخدمات الموجهة للعموم",
+          title: "إنجازات المحطة العمومية - محطات الخدمة والخدمات الموجهة للعموم",
           intro: "ننجز مشاريع موجهة لمحطات الخدمة المفتوحة للعموم مع ضمان:",
           bullets: [
             "إنجاز كامل لمحطات الخدمة",
@@ -819,6 +841,7 @@ export const translations = {
       voirDetails: "عرض التفاصيل",
       fermer: "إغلاق",
       downloadDossier: "تحميل الملف التقني",
+      fournisseur: "المورد",
     },
     equipment: {
       label: "المعدات",
@@ -922,6 +945,7 @@ export const translations = {
       quickLinksTitle: "روابط سريعة",
       quickLinks: ["الخدمات", "الأنشطة", "المنتجات", "من نحن", "اتصل بنا"],
       contactTitle: "اتصل بنا",
+      certificationTitle: "الشهادة",
       legalTitle: "المعلومات القانونية / ICE",
       rights: "© 2025 Maghreb Fueling Technologies S.A.R.L. جميع الحقوق محفوظة.",
       designed: "مصمم من أجل الصناعة",

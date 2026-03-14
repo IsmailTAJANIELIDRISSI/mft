@@ -25,7 +25,7 @@ import { translations } from "../../i18n/translations";
 const tabs = [
   {
     id: "b2b",
-    label: "B2B",
+    label: "Station privée",
     sublabel: "Industriels",
     icon: <Factory size={18} />,
     color: "from-mft-orange to-[#D35F10]",
@@ -60,7 +60,7 @@ const tabs = [
   },
   {
     id: "b2c",
-    label: "B2C",
+    label: "Station publique",
     sublabel: "Stations",
     icon: <Fuel size={18} />,
     color: "from-mft-green to-mft-green-dark",

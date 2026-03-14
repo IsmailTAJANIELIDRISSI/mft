@@ -143,22 +143,19 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Legal */}
-          <div>
-            <h4 className="font-heading font-semibold text-white mb-6 uppercase tracking-wider text-sm">
-              {t.footer.legalTitle}
+          {/* ISO Certification */}
+          <div className="flex flex-col gap-2">
+            <h4 className="font-heading font-semibold text-white uppercase tracking-wider text-sm pl-[5rem] md:pl-[6rem]">
+              {t.footer.certificationTitle}
             </h4>
-            <ul className="space-y-4">
-              <li>
-                <span className="text-sm">S.A.R.L</span>
-              </li>
-              <li>
-                <span className="text-sm">ICE : 000314920000083</span>
-              </li>
-              <li>
-                <span className="text-sm">RC : 15189</span>
-              </li>
-            </ul>
+            <img
+              src="/images/iso.jpeg"
+              alt="ISO Certification"
+              className="h-[5.5rem] w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+              onError={(e) => {
+                e.currentTarget.style.display = "none";
+              }}
+            />
           </div>
         </div>
 
