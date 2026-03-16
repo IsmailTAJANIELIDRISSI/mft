@@ -10,8 +10,8 @@ export const translations = {
   fr: {
     nav: {
       links: [
-        { name: "Services", href: "#services" },
         { name: "Activités", href: "#activites" },
+        { name: "Services", href: "#services" },
         { name: "Réalisations", href: "#realisations" },
         { name: "Produits", href: "#produits" },
         { name: "À Propos", href: "#about" },
@@ -30,9 +30,9 @@ export const translations = {
       primary: "Découvrir nos services",
       secondary: "Nous contacter",
       stats: [
-        { value: "15+", label: "Années d'expérience" },
-        { value: "200+", label: "Installations réalisées" },
-        { value: "3", label: "Marques certifiées" },
+        { value: "25+", label: "Années d'expérience" },
+        { value: "1500", label: "Installations réalisées" },
+        { value: "6", label: "Marques certifiées" },
       ],
     },
     about: {
@@ -40,8 +40,9 @@ export const translations = {
       titlePrefix: "Maghreb Fueling",
       titleHighlight: "Technologies",
       paragraphs: [
-        "Maghreb Fueling Technologie est une entreprise spécialisée dans les solutions techniques et les services pour les installations carburant, les infrastructures industrielles et énergétiques.",
-        "Grâce à une équipe d'experts techniques et à une expérience solide dans le domaine, nous proposons des solutions fiables, innovantes et adaptées aux besoins spécifiques de chaque site, en respectant les normes industrielles et environnementales.",
+        "Maghreb Fueling Technologie est une entreprise spécialisée dans le domaine pétrolier et énergétique. Elle intervient dans la réalisation de stations-service, de dépôts pétroliers, de dépôts de gaz ainsi que dans les installations destinées au secteur industriel.",
+        "Grâce à une équipe d'experts techniques et à une solide expérience dans le domaine, nous proposons des solutions fiables, innovantes et adaptées aux besoins spécifiques de chaque site, tout en respectant les normes industrielles et environnementales en vigueur.",
+        "Forte de plus de 30 ans d'expérience de son fondateur, M. Mohamed AGUNI, l'entreprise bénéficie d'un savoir-faire reconnu dans le secteur industriel et compte à son actif des centaines de stations réalisées.",
       ],
       features: [
         {
@@ -89,9 +90,9 @@ export const translations = {
           desc: "Modernisation des installations pour répondre aux normes actuelles.",
         },
         {
-          category: "Contrats",
-          title: "Contrats de Maintenance",
-          desc: "Suivi régulier, interventions prioritaires et maîtrise de vos coûts d'exploitation.",
+          category: "Formation",
+          title: "Formation",
+          desc: "Programmes de formation technique spécialisés pour opérateurs, techniciens et responsables d'installations pétrolières. Amélioration des compétences, utilisation correcte des équipements et respect des normes de sécurité.",
         },
         {
           category: "Équipements",
@@ -327,8 +328,8 @@ export const translations = {
   en: {
     nav: {
       links: [
-        { name: "Services", href: "#services" },
         { name: "Activities", href: "#activites" },
+        { name: "Services", href: "#services" },
         { name: "Projects", href: "#realisations" },
         { name: "Products", href: "#produits" },
         { name: "About", href: "#about" },
@@ -347,9 +348,9 @@ export const translations = {
       primary: "Discover our services",
       secondary: "Contact us",
       stats: [
-        { value: "15+", label: "Years of experience" },
-        { value: "200+", label: "Completed installations" },
-        { value: "3", label: "Certified brands" },
+        { value: "25+", label: "Years of experience" },
+        { value: "1500", label: "Completed installations" },
+        { value: "6", label: "Certified brands" },
       ],
     },
     about: {
@@ -357,8 +358,9 @@ export const translations = {
       titlePrefix: "Maghreb Fueling",
       titleHighlight: "Technologies",
       paragraphs: [
-        "Maghreb Fueling Technologie is a company specialized in technical solutions and services for fuel installations, industrial infrastructure, and energy systems.",
-        "With a team of technical experts and solid field experience, we provide reliable, innovative solutions tailored to each site while respecting industrial and environmental standards.",
+        "Maghreb Fueling Technologie is a company specialized in the petroleum and energy sector. It is involved in the realization of service stations, petroleum depots, gas depots, and installations for the industrial sector.",
+        "Thanks to a team of technical experts and solid experience in the field, we offer reliable, innovative solutions tailored to the specific needs of each site, while respecting current industrial and environmental standards.",
+        "With over 30 years of experience from its founder, Mr. Mohamed AGUNI, the company benefits from recognized know-how in the industrial sector and has hundreds of completed stations to its credit.",
       ],
       features: [
         {
@@ -406,9 +408,9 @@ export const translations = {
           desc: "Modernization of installations to meet current standards.",
         },
         {
-          category: "Contracts",
-          title: "Maintenance Contracts",
-          desc: "Regular follow-up, priority interventions, and control of operating costs.",
+          category: "Training",
+          title: "Training",
+          desc: "Specialized technical training programs for operators, technicians and managers of petroleum installations. Skills improvement, correct use of equipment and compliance with safety standards.",
         },
         {
           category: "Equipment",
@@ -642,8 +644,8 @@ export const translations = {
   ar: {
     nav: {
       links: [
-        { name: "الخدمات", href: "#services" },
         { name: "الأنشطة", href: "#activites" },
+        { name: "الخدمات", href: "#services" },
         { name: "الإنجازات", href: "#realisations" },
         { name: "المنتجات", href: "#produits" },
         { name: "من نحن", href: "#about" },
@@ -662,9 +664,9 @@ export const translations = {
       primary: "اكتشف خدماتنا",
       secondary: "اتصل بنا",
       stats: [
-        { value: "15+", label: "سنة من الخبرة" },
-        { value: "200+", label: "عملية تركيب منجزة" },
-        { value: "3", label: "علامات معتمدة" },
+        { value: "25+", label: "سنة من الخبرة" },
+        { value: "1500", label: "عملية تركيب منجزة" },
+        { value: "6", label: "علامات معتمدة" },
       ],
     },
     about: {
@@ -672,8 +674,9 @@ export const translations = {
       titlePrefix: "Maghreb Fueling",
       titleHighlight: "Technologies",
       paragraphs: [
-        "ماجريب فيولينغ تكنولوجي شركة متخصصة في الحلول التقنية والخدمات الخاصة بمنشآت الوقود والبنية التحتية الصناعية والطاقة.",
-        "بفضل فريق من الخبراء التقنيين وتجربة ميدانية قوية، نقدم حلولاً موثوقة ومبتكرة ومصممة حسب احتياجات كل موقع مع احترام المعايير الصناعية والبيئية.",
+        "ماجريب فيولينغ تكنولوجي شركة متخصصة في المجال البترولي والطاقي. تتدخل في إنشاء محطات الخدمة ومستودعات البترول ومستودعات الغاز وكذلك المنشآت الموجهة للقطاع الصناعي.",
+        "بفضل فريق من الخبراء التقنيين وتجربة ميدانية راسخة، نقدم حلولاً موثوقة ومبتكرة ومصممة حسب احتياجات كل موقع، مع احترام المعايير الصناعية والبيئية السارية.",
+        "بقوة تجربة تفوق 30 عاماً لـمؤسسها السيد محمد أكوني، تستفيد الشركة من خبرة معترف بها في القطاع الصناعي وتحصي مئات المحطات المنفذة.",
       ],
       features: [
         {
@@ -721,9 +724,9 @@ export const translations = {
           desc: "تحديث المنشآت لتلبية المعايير الحالية.",
         },
         {
-          category: "العقود",
-          title: "عقود الصيانة",
-          desc: "متابعة منتظمة وتدخلات ذات أولوية وتحكم في تكاليف التشغيل.",
+          category: "التكوين",
+          title: "التكوين",
+          desc: "برامج تكوين تقني متخصصة للمشغلين والتقنيين ومسؤولي المنشآت البترولية. تحسين الكفاءات واستخدام صحيح للمعدات واحترام معايير السلامة.",
         },
         {
           category: "المعدات",

@@ -76,7 +76,7 @@ const ActivityModal = ({ activity, onClose, onPrev, onNext }: ActivityModalProps
                   {t.activities.activity} #{activity.id}
                 </p>
                 <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl text-white leading-snug">
-                  {activity.title}
+                  {activity.detailTitle ?? activity.title}
                 </h2>
               </div>
 

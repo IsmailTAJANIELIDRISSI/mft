@@ -12,6 +12,7 @@ export type Activity = {
   heroImage: string;
   images: string[];
   content: ActivityContentBlock[];
+  detailTitle?: string;
 };
 
 export const activities: Activity[] = [
@@ -20,14 +21,14 @@ export const activities: Activity[] = [
     slug: "stations-service",
     title: "Stations-service & infrastructures de distribution",
     summary:
-      "Réalisation, modernisation et extension de stations-service avec des solutions complètes, sûres et conformes.",
-    heroImage: "/activities/stations-service/img-01.jpeg",
+      "Nous intervenons dans la réalisation, la modernisation et l'extension des stations-service, en proposant des solutions complètes et adaptées aux besoins des exploitants.",
+    heroImage: "/images/activities/stations-service/img-01.jpeg",
     images: [
-      "/activities/stations-service/img-01.jpeg",
-      "/activities/stations-service/img-02.jpeg",
-      "/activities/stations-service/img-03.jpeg",
-      "/activities/stations-service/img-04.jpeg",
-      "/activities/stations-service/img-05.jpeg",
+      "/images/activities/stations-service/img-01.jpeg",
+      "/images/activities/stations-service/img-02.jpeg",
+      "/images/activities/stations-service/img-03.jpeg",
+      "/images/activities/stations-service/img-04.jpeg",
+      "/images/activities/stations-service/img-05.jpeg",
     ],
     content: [
       {
@@ -38,6 +39,10 @@ export const activities: Activity[] = [
         bullets: [
           "Conception et aménagement des stations-service",
           "Installation des équipements de distribution de carburant",
+          "Installation des équipements électriques (armoires, câblage, raccordements, mise en service)",
+          "Installation de la tuyauterie KPS et réseaux carburant",
+          "Raccordement et intégration des systèmes RIDART",
+          "Intégration des systèmes de gestion automatisés avec les solutions de paiement",
           "Intégration des systèmes de sécurité et de contrôle",
           "Mise en conformité des installations existantes",
           "Modernisation et rénovation des stations",
@@ -54,6 +59,7 @@ export const activities: Activity[] = [
     title: "Construction métallique & charpente – supports de citernes",
     summary:
       "Conception et réalisation de structures métalliques robustes pour infrastructures carburant, industrielles et techniques.",
+    detailTitle: "Construction métallique : charpente et réservoir de stockage",
     heroImage: "/activities/construction-metallique/img-01.jpeg",
     images: [
       "/activities/construction-metallique/img-01.jpeg",
@@ -65,9 +71,6 @@ export const activities: Activity[] = [
         text: "Maghreb Fueling Technologie réalise des travaux de construction métallique et de charpente destinés aux infrastructures carburant, industrielles et techniques, notamment pour l'installation et le support de citernes.",
       },
       {
-        text: "Nos réalisations sont conçues pour garantir stabilité, sécurité et durabilité, tout en répondant aux contraintes mécaniques et environnementales des sites.",
-      },
-      {
         title: "Charpente métallique",
         bullets: [
           "Étude et réalisation de charpentes métalliques",
@@ -76,11 +79,12 @@ export const activities: Activity[] = [
         ],
       },
       {
-        title: "Supports et structures pour citernes",
+        title: "Citernes de stockage",
         bullets: [
-          "Supports métalliques pour citernes aériennes",
-          "Châssis et plateformes pour réservoirs",
-          "Structures de maintien et de protection des citernes",
+          "Citernes aériennes",
+          "Citernes enterrées",
+          "Citernes simple paroi",
+          "Citernes double paroi",
         ],
       },
       {
@@ -125,62 +129,46 @@ export const activities: Activity[] = [
   },
   {
     id: 4,
-    slug: "gestion-supervision-carburant",
-    title: "Gestion & supervision des installations carburant",
+    slug: "depots-petroliers",
+    title: "Dépôts Pétroliers",
     summary:
-      "Supervision en temps réel, traçabilité des opérations, alarmes et centralisation multi-sites pour une exploitation maîtrisée.",
-    heroImage: "/activities/gestion-supervision-carburant/img-01.jpeg",
-    images: ["/activities/gestion-supervision-carburant/img-01.jpeg"],
+      "Maghreb Fueling Technologie propose des solutions complètes pour la conception, l'installation et la maintenance de dépôts pétroliers destinés au stockage et à la distribution des produits pétroliers.",
+    heroImage: "/activities/depots-petroliers/img-01.jpeg",
+    images: [
+      "/activities/depots-petroliers/img-01.jpeg",
+      "/activities/depots-petroliers/img-02.jpeg",
+      "/activities/depots-petroliers/img-03.jpeg",
+      "/activities/depots-petroliers/img-04.jpeg",
+      "/activities/depots-petroliers/img-05.jpeg",
+      "/activities/depots-petroliers/img-06.jpeg",
+    ],
     content: [
       {
-        text: "Maghreb Fueling Technologie accompagne ses clients dans la gestion intelligente et la supervision technique des installations carburant afin d'assurer un contrôle précis, sécurisé et continu des opérations.",
+        text: "Maghreb Fueling Technologie propose des solutions complètes pour la conception, l'installation et la maintenance de dépôts pétroliers destinés au stockage et à la distribution des produits pétroliers.",
       },
       {
-        text: "Cette activité permet aux exploitants de suivre leurs installations en temps réel, d'optimiser la gestion des stocks et de renforcer la sécurité des infrastructures.",
+        text: "Nos équipes interviennent dans toutes les étapes du projet afin de garantir des installations sécurisées, conformes aux normes industrielles et parfaitement adaptées aux besoins du client.",
       },
       {
-        title: "Supervision des réservoirs et des stocks",
+        title: "Nos services comprennent",
         bullets: [
-          "Surveillance en temps réel des niveaux de carburant",
-          "Suivi des volumes disponibles dans chaque citerne",
-          "Détection des niveaux d'eau et des variations anormales",
-          "Visualisation claire des données via consoles ou interfaces dédiées",
+          "Étude et conception de dépôts pétroliers",
+          "Installation de cuves de stockage et équipements associés",
+          "Réalisation des réseaux de tuyauterie et systèmes de pompage",
+          "Mise en place des systèmes de sécurité et de contrôle",
+          "Maintenance et assistance technique",
         ],
       },
       {
-        title: "Gestion automatisée des données carburant",
+        title: "Liste d'équipements",
         bullets: [
-          "Enregistrement automatique des opérations de remplissage",
-          "Suivi des consommations",
-          "Génération de rapports détaillés (journaliers, mensuels, périodiques)",
-          "Historisation des données pour analyse et audit",
-        ],
-      },
-      {
-        title: "Alarmes, sécurité & prévention des risques",
-        bullets: [
-          "Alarmes de niveau haut / bas",
-          "Alertes en cas de variation anormale ou de suspicion de fuite",
-          "Surveillance continue des paramètres critiques",
-          "Réduction des risques environnementaux et opérationnels",
-        ],
-      },
-      {
-        title: "Centralisation & supervision multi-sites",
-        bullets: [
-          "Centralisation des données de plusieurs sites",
-          "Supervision à distance",
-          "Accès simplifié aux informations clés",
-          "Meilleure coordination des opérations",
-        ],
-      },
-      {
-        title: "Intégration avec les équipements existants",
-        bullets: [
-          "Intégration aux installations existantes",
-          "Compatibilité avec les systèmes de jaugeage et de mesure",
-          "Communication avec les équipements de terrain",
-          "Évolutivité selon les besoins futurs du client",
+          "Cuves de stockage carburant",
+          "Bras de chargement",
+          "Systèmes de pompage",
+          "Systèmes de mesure et jaugeage",
+          "Skids pétroliers",
+          "Systèmes de sécurité (détection fuite, incendie)",
+          "Automatisation et supervision",
         ],
       },
     ],

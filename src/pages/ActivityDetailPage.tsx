@@ -34,7 +34,7 @@ const ActivityDetailPage = () => {
             Activité #{activity.id}
           </p>
           <h1 className="font-heading text-3xl lg:text-5xl text-mft-dark mb-5 leading-tight">
-            {activity.title}
+            {activity.detailTitle ?? activity.title}
           </h1>
           <p className="text-lg text-mft-grey leading-relaxed">
             {activity.summary}

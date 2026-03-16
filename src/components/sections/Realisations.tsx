@@ -134,7 +134,7 @@ const galleryImagesByTab: Record<string, string[]> = {
   b2b: Array.from({ length: 14 }, (_, i) =>
     `/images/realisations/b2b/img-${String(i + 1).padStart(2, "0")}.jpeg`
   ),
-  b2c: Array.from({ length: 14 }, (_, i) =>
+  b2c: Array.from({ length: 18 }, (_, i) =>
     `/images/realisations/b2c/img-${String(i + 1).padStart(2, "0")}.jpeg`
   ),
   depots: Array.from({ length: 8 }, (_, i) =>
@@ -277,21 +277,9 @@ const Realisations = () => {
         >
           <h2 className="font-heading font-extrabold text-3xl lg:text-4xl text-white leading-tight text-center">
             {t.realisations.headingBefore}{" "}
-            <motion.span
-              initial={{ backgroundSize: "0% 3px" }}
-              whileInView={{ backgroundSize: "100% 3px" }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, delay: 0.4 }}
-              className="text-transparent bg-clip-text"
-              style={{
-                backgroundImage: "linear-gradient(to right, #E87722, #F4A543)",
-                WebkitBackgroundClip: "text",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "0 100%",
-              }}
-            >
+            <span className="text-white">
               {t.realisations.headingHighlight}
-            </motion.span>
+            </span>
           </h2>
         </motion.div>
 
@@ -434,11 +422,11 @@ const Realisations = () => {
                 <X size={18} />
               </button>
 
-              <div className="relative rounded-3xl overflow-hidden border border-white/15 bg-black/20 backdrop-blur-sm shadow-[0_30px_70px_rgba(0,0,0,0.55)]">
+              <div className="relative rounded-3xl overflow-hidden border border-white/15 bg-black/40 backdrop-blur-sm shadow-[0_30px_70px_rgba(0,0,0,0.55)] flex items-center justify-center p-4 min-h-[40vh]">
                 <GalleryImage
                   src={currentGalleryImages[galleryIndex]}
                   alt={`Réalisation ${localizedTabs.find((tab) => tab.id === galleryTab)?.label ?? galleryTab} ${galleryIndex + 1}`}
-                  className="w-full h-[65vh] object-cover"
+                  className="max-w-full max-h-[80vh] w-auto h-auto object-contain"
                 />
 
                 <div className="absolute inset-0 pointer-events-none ring-1 ring-white/10 rounded-3xl" />

@@ -78,7 +78,7 @@ Les tuyaux KPS sont fabriqués selon un procédé exclusif avec une barrière an
   },
   {
     slug: "raccordements-ridart",
-    title: "Raccordements – Ridart S.R.L.",
+    title: "Raccordements – Ridart",
     content: `La gamme de raccordements Ridart offre des solutions complètes et fiables pour connecter, sécuriser et optimiser les réseaux de tuyauterie dans les stations-service, dépôts et installations industrielles. Tous les produits sont fabriqués en Italie avec plus de 50 ans d'expérience.
 
 Types de raccords et composants :

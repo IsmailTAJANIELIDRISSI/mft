@@ -101,20 +101,13 @@ const Hero = () => {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1, ease }}
-            className="flex flex-col sm:flex-row gap-4"
           >
             <a
               href="#services"
-              className="group relative px-8 py-4 rounded-xl bg-mft-orange text-white font-bold text-center transition-all hover:shadow-[0_20px_40px_-12px_rgba(232,119,34,0.4)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden"
+              className="group relative inline-block px-8 py-4 rounded-xl bg-mft-orange text-white font-bold text-center transition-all hover:shadow-[0_20px_40px_-12px_rgba(232,119,34,0.4)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden"
             >
               <span className="relative z-10">{t.hero.primary}</span>
               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-            </a>
-            <a
-              href="#contact"
-              className="px-8 py-4 rounded-xl border border-white/20 text-white font-bold text-center transition-all hover:bg-white/10 hover:border-white/40 hover:-translate-y-0.5"
-            >
-              {t.hero.secondary}
             </a>
           </motion.div>
         </div>
