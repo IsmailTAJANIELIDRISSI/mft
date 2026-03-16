@@ -22,9 +22,9 @@ export const activities: Activity[] = [
     title: "Stations-service & infrastructures de distribution",
     summary:
       "Nous intervenons dans la réalisation, la modernisation et l'extension des stations-service, en proposant des solutions complètes et adaptées aux besoins des exploitants.",
-    heroImage: "/images/activities/stations-service/img-01.jpeg",
+    heroImage: "/images/activite1/img.png",
     images: [
-      "/images/activities/stations-service/img-01.jpeg",
+      "/images/activite1/img.png",
       "/images/activities/stations-service/img-02.jpeg",
       "/images/activities/stations-service/img-03.jpeg",
       "/images/activities/stations-service/img-04.jpeg",
