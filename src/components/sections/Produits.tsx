@@ -394,22 +394,7 @@ const Produits = () => {
             {t.produits.label}
           </motion.span>
           <h2 className="font-heading font-extrabold text-4xl lg:text-5xl text-white mb-5">
-            {t.produits.titleBefore}{t.produits.titleBefore ? " " : ""}
-            <motion.span
-              initial={{ backgroundSize: "0% 3px" }}
-              whileInView={{ backgroundSize: "100% 3px" }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, delay: 0.4 }}
-              className="text-transparent bg-clip-text"
-              style={{
-                backgroundImage: "linear-gradient(to right, #E87722, #F4A543)",
-                WebkitBackgroundClip: "text",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "0 100%",
-              }}
-            >
-              {t.produits.titleHighlight}
-            </motion.span>
+            {`${t.produits.titleBefore} ${t.produits.titleHighlight}`.trim()}
           </h2>
         </motion.div>
 
