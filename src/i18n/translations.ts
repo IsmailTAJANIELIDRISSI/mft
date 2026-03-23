@@ -209,8 +209,8 @@ export const translations = {
     },
     produits: {
       label: "PRODUITS",
-      titleBefore: "Nos équipements et",
-      titleHighlight: "solutions techniques",
+      titleBefore: "Nos ",
+      titleHighlight: "équipements",
       voirDetails: "Voir les détails",
       fermer: "Fermer",
       downloadDossier: "Télécharger le dossier technique",
@@ -525,8 +525,8 @@ export const translations = {
     },
     produits: {
       label: "PRODUCTS",
-      titleBefore: "Our equipment and",
-      titleHighlight: "technical solutions",
+      titleBefore: "Our ",
+      titleHighlight: "equipment",
       voirDetails: "View details",
       fermer: "Close",
       downloadDossier: "Download technical brochure",
@@ -839,8 +839,8 @@ export const translations = {
     },
     produits: {
       label: "المنتجات",
-      titleBefore: "معداتنا وحلولنا",
-      titleHighlight: "التقنية",
+      titleBefore: "",
+      titleHighlight: "معداتنا",
       voirDetails: "عرض التفاصيل",
       fermer: "إغلاق",
       downloadDossier: "تحميل الملف التقني",

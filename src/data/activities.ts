@@ -56,7 +56,7 @@ export const activities: Activity[] = [
   {
     id: 2,
     slug: "construction-metallique",
-    title: "Construction métallique & charpente – supports de citernes",
+    title: "Construction métallique & charpente",
     summary:
       "Conception et réalisation de structures métalliques robustes pour infrastructures carburant, industrielles et techniques.",
     detailTitle: "Construction métallique : charpente et réservoir de stockage",

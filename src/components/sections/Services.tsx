@@ -41,7 +41,7 @@ const servicesSet = [
     category: "Formation",
     title: "Formation",
     desc: "Programmes de formation technique spécialisés pour opérateurs, techniciens et responsables d'installations pétrolières.",
-    image: "/images/formation.jpeg",
+    image: "/images/formation2.jpeg",
     num: "05",
     color: "#E87722",
   },

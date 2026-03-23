@@ -394,7 +394,7 @@ const Produits = () => {
             {t.produits.label}
           </motion.span>
           <h2 className="font-heading font-extrabold text-4xl lg:text-5xl text-white mb-5">
-            {t.produits.titleBefore}{" "}
+            {t.produits.titleBefore}{t.produits.titleBefore ? " " : ""}
             <motion.span
               initial={{ backgroundSize: "0% 3px" }}
               whileInView={{ backgroundSize: "100% 3px" }}
@@ -422,8 +422,9 @@ const Produits = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.35, delay: i * 0.06 }}
-                className="group rounded-3xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-md overflow-hidden hover:border-white/[0.14] hover:bg-white/[0.05] transition-all duration-300 flex flex-col"
+                className="group relative rounded-2xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm overflow-hidden flex flex-col transition-all duration-300 ease-out hover:-translate-y-1 hover:border-mft-orange/25 hover:bg-white/[0.04] hover:shadow-[0_12px_40px_-12px_rgba(0,0,0,0.4)]"
               >
+                <div className="absolute top-0 left-0 right-0 z-10 h-0.5 bg-transparent group-hover:bg-mft-orange/60 transition-colors duration-300 rounded-t-2xl" />
                 <div className="relative aspect-[4/3] bg-white/[0.02] flex items-center justify-center overflow-hidden">
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-white/40 p-4 text-center">
                     <Package className="w-12 h-12" strokeWidth={1} />
@@ -433,7 +434,7 @@ const Produits = () => {
                     <GalleryImage
                       src={`/images/produits/${produit.slug}/img-01`}
                       alt={produit.title}
-                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.02]"
                       hideUntilLoaded
                     />
                   </div>
@@ -444,7 +445,7 @@ const Produits = () => {
                   </h3>
                   <button
                     onClick={() => openModal(produit)}
-                    className="mt-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-mft-orange/20 hover:bg-mft-orange/30 text-mft-orange font-semibold text-sm transition-colors duration-300 border border-mft-orange/40"
+                    className="mt-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-mft-orange/15 text-mft-orange font-semibold text-sm transition-all duration-300 border border-mft-orange/30 hover:bg-mft-orange/25 hover:border-mft-orange/50"
                   >
                     {t.produits.voirDetails}
                     <ChevronRight className="w-4 h-4" />
