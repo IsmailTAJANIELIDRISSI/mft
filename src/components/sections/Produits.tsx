@@ -23,7 +23,6 @@ const produitSlugs = [
   "citernes-stockage",
   "chambres-composite",
   "car-wash",
-  "equipements-servicing-meclube",
   "pompes-immergees-barbero",
 ] as const;
 
@@ -226,25 +225,6 @@ Service & accompagnement technique :
 • Fourniture de pièces et accessoires
 
 Intégration avec les stations-service : association aux systèmes de gestion et de paiement.`,
-  },
-  {
-    slug: "equipements-servicing-meclube",
-    title: "Équipements Servicing – MECLUBE",
-    content: `Gamme complète d'équipements de servicing professionnels fournis par MECLUBE, adaptés aux stations-service, ateliers et sites industriels.
-
-Produits :
-• Surpresse à graisse pneumatique – Distribution rapide et contrôlée de graisse
-• Surpresse pneumatique à huile – Transfert des huiles lubrifiantes
-• Pistolet compteur digital – Mesure précise du volume distribué
-• Enrouleurs carrossés ouverts (Air, Graisse, Huile)
-• Pompe à membrane – Pompage et transfert des fluides techniques
-• Machine à laver industrielle – Nettoyage des pièces mécaniques
-• Compresseur à borne air – Solution pour l'air comprimé
-
-Avantages : Solutions fiables et durables, meilleure précision, réduction des temps d'arrêt, conception ergonomique.`,
-    fournisseurLinks: [
-      { label: "MECLUBE", url: "https://meclube.com/It" },
-    ],
   },
   {
     slug: "pompes-immergees-barbero",
