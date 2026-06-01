@@ -23,7 +23,6 @@ const references = [
 ];
 
 const LOGOS_PER_PAGE = 6;
-const COLS = 3;
 
 const References = () => {
   const { language } = useLanguage();
@@ -80,7 +79,7 @@ const References = () => {
           <div className="flex-1 min-w-0">
             <div className="grid grid-cols-3 gap-5">
               <AnimatePresence mode="wait">
-                {currentRefs.map((reference, index) => (
+                {currentRefs.map((reference) => (
                   <motion.div
                     key={`${reference.name}-${page}`}
                     initial={{ opacity: 0, y: 16 }}
